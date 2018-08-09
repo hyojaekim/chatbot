@@ -1,48 +1,68 @@
 <?php
-//include('include/dbconfig.php');
+include "menu.php";
 use Cmfcmf\OpenWeatherMap;
 
 $data = json_decode(file_get_contents('php://input'),true);
 $content = $data["content"];
-/*$user_key=$data["user_key"];
+$kkk = "------------------------------";
+$today = date("Y/m/d"); //오늘
+$tomorrow = date("Y-m-d", mktime(0,0,0,date("m")  , date("d")+1, date("Y"))); //내일
 
-$sql = "insert into log(user_key, content) values('$user_key', '$content')";
-$mysqli->query($sql);*/
-$campus;
-$x = 0;
-
-//캠퍼스 지정
-if($x == 0){
-    $campus = "글로벌(고성)";
-} elseif($x == 1) {
-    $campus = "메트로폴(양주)";
-} elseif($x == 2) {
-    $campus = "메디컬(원주문막)";
-} else{
-    $x = 0;
-}
-
-// 급식
-if($content=="학식"){
-echo <<< EOD
-    {
-        "message": {
-            "text": "오늘? 내일?"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "오늘 학식",
-                "내일 학식",
-                "처음으로"
-            ]
-        }
+$day = date('w'); //오늘 요일
+    if ($day == 0){
+        $day = "일요일";
+    }else if ($day == 1) {
+        $day = "월요일";
+    }else if ($day == 2) {
+        $day = "화요일";
+    }else if ($day == 3) {
+        $day = "수요일";
+    }else if ($day == 4) {
+        $day = "목요일";
+    }else if ($day == 5) {
+        $day = "금요일";
+    }else{
+        $day = "토요일";
     }
-EOD;
-}
+$dayT = date('w'); //내일 요일
+    if ($dayT == 0){
+        $dayT = "월요일";
+    }else if ($dayT == 1) {
+        $dayT = "화요일";
+    }else if ($dayT == 2) {
+        $dayT = "수요일";
+    }else if ($dayT == 3) {
+        $dayT = "목요일";
+    }else if ($dayT == 4) {
+        $dayT = "금요일";
+    }else if ($dayT == 5) {
+        $dayT = "토요일";
+    }else{
+        $dayT = "일요일";
+    }
+
+//글로벌 캠퍼스(오늘)
+$GbTmenu = TGTmenu(); //캠퍼스 오늘 메뉴
+
+$SrTDmenu = TSTDmenu(); //숭례원 오늘 조식
+$SrTNmenu = TSTNmenu(); //숭례원 오늘 석식
+
+$YhTDmenu = TYTDmenu(); //양현원 오늘 조식
+$YhTNmenu = TYTNmenu(); //양현원 오늘 석식
+
+//글로벌 캠퍼스(내일)
+$GbMmenu = MGTmenu(); //캠퍼스 내일 메뉴
+
+$SrMDmenu = MSTDmenu(); //숭례원 내일 조식
+$SrMNmenu = MSTNmenu(); //숭례원 내일 석식
+
+$YhMDmenu = MYTDmenu(); //양현원 내일 조식
+$YhMNmenu = MYTNmenu(); //양현원 내일 석식
+
+
 
 // 오늘 학식(검색)
-elseif(strpos($content, "오늘") !== false && strpos($content, "학식") !== false){
+if(strpos($content, "오늘") !== false && strpos($content, "학식") !== false){
 echo <<< EOD
     {
         "message": {
@@ -51,9 +71,9 @@ echo <<< EOD
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "글로벌 캠퍼스",
-                "숭례원",
-                "양현원",
+                "오늘 글로벌 캠퍼스",
+                "오늘 숭례원",
+                "오늘 양현원",
                 "내일 학식",
                 "처음으로"
             ]
@@ -63,7 +83,7 @@ EOD;
 }
 
 // 내일 학식(검색)
-elseif(strpos($content, "내일") !== false && strpos($content, "학식") !== false){
+if(strpos($content, "내일") !== false && strpos($content, "학식") !== false){
 echo <<< EOD
     {
         "message": {
@@ -72,9 +92,9 @@ echo <<< EOD
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "글로벌 캠퍼스",
-                "숭례원",
-                "양현원",
+                "내일 글로벌 캠퍼스",
+                "내일 숭례원",
+                "내일 양현원",
                 "오늘 학식",
                 "처음으로"
             ]
@@ -83,34 +103,19 @@ echo <<< EOD
 EOD;
 }
 
-// 글로벌 캠퍼스 식단
-elseif(strpos($content, "글로벌") !== false && strpos($content, "캠퍼스") !== false){
-    include ("Snoopy.class.php");
-      function test()
-      {
-        $d = date('w'); //날짜를 0 ~ 6 숫자 반환
-        $date = 0;
-          if($d == 0){
-            $date = $d + 6;
-          }else{
-            $date = $d - 1;
-          }
-        $snoopy = new Snoopy;
-        $snoopy->fetch("http://kduniv.ac.kr/www/index.php?pCode=1414720005&CgCode=C01&date=2018-06-17&mode=view");
-        $search = '/<td(?:.*?)>(?:.*?)<\/td>/s';
-        preg_match_all($search, $snoopy->results, $pregs);
-        return $pregs[0][$date];
-      }
-    $menu = test();
+// 글로벌 캠퍼스 학식 메뉴(오늘)
+elseif(strpos($content, "오늘") !== false && strpos($content, "글로벌") !== false 
+        && strpos($content, "캠퍼스") !== false){
 echo <<< EOD
     {
         "message": {
-            "text": "$menu"
+            "text": "$today $day \\n$kkk\\n◈글로벌 캠퍼스 학식 메뉴◈\\n$GbTmenu"
         },
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "학식",
+                "오늘 학식",
+                "내일 학식",
                 "교통",
                 "날씨",
                 "연락처 검색",
@@ -124,17 +129,18 @@ echo <<< EOD
 EOD;
 }
 
-// 숭례원 기숙사 식단
-elseif(strpos($content, "숭례원") !== false){
+// 숭례원 기숙사 조식 석식 메뉴(오늘)
+elseif(strpos($content, "오늘") !== false && strpos($content, "숭례원") !== false){
 echo <<< EOD
     {
         "message": {
-            "text": "2018-00-00 숭례원 기숙사 식단 \\n0000"
+            "text": "$today $day \\n$kkk\\n◈숭례원 조식 메뉴◈\\n $SrTDmenu \\n$kkk\\n◈숭례원 석식 메뉴◈\\n $SrTNmenu"
         },
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "학식",
+                "오늘 학식",
+                "내일 학식",
                 "교통",
                 "날씨",
                 "연락처 검색",
@@ -148,17 +154,94 @@ echo <<< EOD
 EOD;
 }
 
-// 양현원 기숙사 식단
-elseif(strpos($content, "양현원") !== false){
+// 양현원 기숙사 조식 석식 메뉴(오늘)
+elseif(strpos($content, "오늘") !== false && strpos($content, "양현원") !== false){
 echo <<< EOD
     {
         "message": {
-            "text": "2018-00-00 양현원 기숙사 식단 \\n0000"
+            "text": "$today $day \\n$kkk\\n◈양현원 조식 메뉴◈\\n $YhTDmenu \\n$kkk\\n◈양현원 석식 메뉴◈\\n $YhTNmenu"
         },
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "학식",
+                "오늘 학식",
+                "내일 학식",
+                "교통",
+                "날씨",
+                "연락처 검색",
+                "홈페이지",
+                "검색",
+                "건의하기",
+                "캠퍼스 변경"
+            ]
+        }
+    }
+EOD;
+}
+
+// 글로벌 캠퍼스 학식 메뉴(내일)
+elseif(strpos($content, "내일") !== false && strpos($content, "글로벌") !== false 
+        && strpos($content, "캠퍼스") !== false){
+echo <<< EOD
+    {
+        "message": {
+            "text": "$tomorrow $dayT \\n$kkk\\n◈글로벌 캠퍼스 학식 메뉴◈\\n$GbMmenu"
+        },
+        "keyboard": { 
+            "type": "buttons",
+            "buttons": [
+                "오늘 학식",
+                "내일 학식",
+                "교통",
+                "날씨",
+                "연락처 검색",
+                "홈페이지",
+                "검색",
+                "건의하기",
+                "캠퍼스 변경"
+            ]
+        }
+    }
+EOD;
+}
+
+// 숭례원 기숙사 조식 석식 메뉴(내일)
+elseif(strpos($content, "내일") !== false && strpos($content, "숭례원") !== false){
+echo <<< EOD
+    {
+        "message": {
+            "text": "$tomorrow $dayT \\n$kkk\\n◈숭례원 조식 메뉴◈\\n $SrMDmenu \\n$kkk\\n◈숭례원 석식 메뉴◈\\n $SrMNmenu"
+        },
+        "keyboard": { 
+            "type": "buttons",
+            "buttons": [
+                "오늘 학식",
+                "내일 학식",
+                "교통",
+                "날씨",
+                "연락처 검색",
+                "홈페이지",
+                "검색",
+                "건의하기",
+                "캠퍼스 변경"
+            ]
+        }
+    }
+EOD;
+}
+
+// 양현원 기숙사 조식 석식 메뉴(내일)
+elseif(strpos($content, "내일") !== false && strpos($content, "양현원") !== false){
+echo <<< EOD
+    {
+        "message": {
+            "text": "$tomorrow $dayT \\n$kkk\\n◈양현원 조식 메뉴◈\\n $YhMDmenu \\n$kkk\\n◈양현원 석식 메뉴◈\\n $YhMNmenu"
+        },
+        "keyboard": { 
+            "type": "buttons",
+            "buttons": [
+                "오늘 학식",
+                "내일 학식",
                 "교통",
                 "날씨",
                 "연락처 검색",
@@ -173,7 +256,7 @@ EOD;
 }
 
 // 날씨
-elseif(strpos($content, "날씨") !== false){
+if(strpos($content, "날씨") !== false){
 echo <<< EOD
     {
         "message": {
@@ -225,7 +308,8 @@ echo <<< EOD
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "학식",
+                "오늘 학식",
+                "내일 학식",
                 "교통",
                 "날씨",
                 "연락처 검색",
@@ -249,7 +333,8 @@ echo <<< EOD
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "학식",
+                "오늘 학식",
+                "내일 학식",
                 "교통",
                 "날씨",
                 "연락처 검색",
@@ -264,7 +349,7 @@ EOD;
 }
 
 // 홈페이지
-elseif($content == "홈페이지"){
+if($content == "홈페이지"){
 echo <<< EOD
     {
         "message": {
@@ -294,7 +379,8 @@ echo <<< EOD
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "학식",
+                "오늘 학식",
+                "내일 학식",
                 "교통",
                 "날씨",
                 "연락처 검색",
@@ -318,7 +404,8 @@ echo <<< EOD
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "학식",
+                "오늘 학식",
+                "내일 학식",
                 "교통",
                 "날씨",
                 "연락처 검색",
@@ -342,7 +429,8 @@ echo <<< EOD
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "학식",
+                "오늘 학식",
+                "내일 학식",
                 "교통",
                 "날씨",
                 "연락처 검색",
@@ -366,7 +454,8 @@ echo <<< EOD
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "학식",
+                "오늘 학식",
+                "내일 학식",
                 "교통",
                 "날씨",
                 "연락처 검색",
@@ -381,16 +470,17 @@ EOD;
 }
 
 // 건의하기
-elseif(strpos($content, "건의") !== false){
+if(strpos($content, "건의") !== false){
 echo <<< EOD
     {
         "message": {
-            "text": "컴퓨터공학과\\n\\n기능 개선이 필요하거나 \\n추가적인 기능이 필요하다면 \\n메시지 남겨주세요!"
+            "text": "컴퓨터공학과(김효재)\\n\\n기능 개선이 필요하거나 \\n추가적인 기능이 필요하다면 \\n페이스북이나 인스타(hyoja2_)로\\n메시지 남겨주세요!"
         },
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "학식",
+                "오늘 학식",
+                "내일 학식",
                 "교통",
                 "날씨",
                 "연락처 검색",
@@ -409,12 +499,13 @@ elseif($content == "처음으로"){
 echo <<< EOD
     {
         "message": {
-            "text": "$campus 캠퍼스 $x 입니다."
+            "text": "메인 화면 입니다."
         },
         "keyboard": {
             "type": "buttons",
             "buttons": [
-                "학식",
+                "오늘 학식",
+                "내일 학식",
                 "교통",
                 "날씨",
                 "연락처 검색",
@@ -427,8 +518,6 @@ echo <<< EOD
     }
 EOD;
 }
-
-
 
 // 검색창
 if($content == "검색"){
@@ -450,7 +539,8 @@ echo <<< EOD
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "학식",
+                "오늘 학식",
+                "내일 학식",
                 "교통",
                 "날씨",
                 "연락처 검색",
