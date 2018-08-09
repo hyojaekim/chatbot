@@ -27,5 +27,5 @@ dothome 무료 호스팅을 사용하고 있습니다.
 >누르면 캠퍼스가 변경되어 정보를 볼 수 있는 기능(코드가 길어져서 점점 느려지는 것 같아서 보류)
 
 ### 스크린샷
-![menu](./image/1.png)
+![1](https://user-images.githubusercontent.com/41109150/43906276-d79c6900-9c2d-11e8-8146-e93a70d826da.png)
 
