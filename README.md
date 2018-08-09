@@ -1,2 +1,4 @@
 # chatbot
-KCU chatbot develop
+KCU 챗봇 개발
+
+# ●주요 기능
