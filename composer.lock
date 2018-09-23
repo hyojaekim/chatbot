@@ -1,0 +1,111 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "4e3493ea4ae694bf65e5d0ccdcab3f00",
+    "packages": [
+        {
+            "name": "chicpro/php-kakao-translate",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chicpro/php-kakao-translate.git",
+                "reference": "4abd97abeb5a2b40767a046c63295a5dd98bcb94"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chicpro/php-kakao-translate/zipball/4abd97abeb5a2b40767a046c63295a5dd98bcb94",
+                "reference": "4abd97abeb5a2b40767a046c63295a5dd98bcb94",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "chicpro\\KAKAO\\": "src/chicpro/KAKAO/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "chicpro",
+                    "email": "chicpro@gmail.com",
+                    "homepage": "https://ncube.net"
+                }
+            ],
+            "description": "PHP Client for Kakao Translate API",
+            "keywords": [
+                "api",
+                "kakao",
+                "translate"
+            ],
+            "time": "2018-07-17T02:36:49+00:00"
+        },
+        {
+            "name": "cmfcmf/openweathermap-php-api",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cmfcmf/OpenWeatherMap-PHP-Api.git",
+                "reference": "a15fd886dcdba9341a5025dd2c7bb5604c7be163"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cmfcmf/OpenWeatherMap-PHP-Api/zipball/a15fd886dcdba9341a5025dd2c7bb5604c7be163",
+                "reference": "a15fd886dcdba9341a5025dd2c7bb5604c7be163",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xml": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8 || ^5.0.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cmfcmf\\": "Cmfcmf"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Flach (cmfcmf)",
+                    "email": "cmfcmf.flach@gmail.com",
+                    "homepage": "http://cmfcmf.github.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A php api to parse weather data from OpenWeatherMap.org. This api tries to normalise and abstract the data and remove inconsistencies.",
+            "homepage": "https://github.com/cmfcmf/OpenWeatherMap-PHP-Api",
+            "keywords": [
+                "OpenWeatherMap",
+                "api",
+                "free",
+                "owm",
+                "weather"
+            ],
+            "time": "2018-04-16T18:14:21+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
