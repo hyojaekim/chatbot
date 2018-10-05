@@ -4,51 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e3493ea4ae694bf65e5d0ccdcab3f00",
+    "content-hash": "511a2c71122089a25bcba13747439803",
     "packages": [
-        {
-            "name": "chicpro/php-kakao-translate",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/chicpro/php-kakao-translate.git",
-                "reference": "4abd97abeb5a2b40767a046c63295a5dd98bcb94"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/chicpro/php-kakao-translate/zipball/4abd97abeb5a2b40767a046c63295a5dd98bcb94",
-                "reference": "4abd97abeb5a2b40767a046c63295a5dd98bcb94",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "php": ">=7.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "chicpro\\KAKAO\\": "src/chicpro/KAKAO/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "chicpro",
-                    "email": "chicpro@gmail.com",
-                    "homepage": "https://ncube.net"
-                }
-            ],
-            "description": "PHP Client for Kakao Translate API",
-            "keywords": [
-                "api",
-                "kakao",
-                "translate"
-            ],
-            "time": "2018-07-17T02:36:49+00:00"
-        },
         {
             "name": "cmfcmf/openweathermap-php-api",
             "version": "v2.3.0",

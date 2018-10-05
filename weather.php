@@ -1,6 +1,5 @@
 <?php
     use Cmfcmf\OpenWeatherMap;
-
     //날씨
     function WeatherData($map)
     {

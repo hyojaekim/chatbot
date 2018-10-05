@@ -1,9 +1,12 @@
 <?php
 include "menu.php";
 include "weather.php";
+include "include/campusdb.php";
 
 $data = json_decode(file_get_contents('php://input'),true);
 $content = $data["content"];
+
+$campusDB2 = database2(); //캠퍼스 db 출력
 
 $kkk = "------------------------------";
 
@@ -18,7 +21,7 @@ $day = date('w'); //오늘 요일
     else if ($day == 4) {$day = "목요일";}
     else if ($day == 5) {$day = "금요일";}
     else{$day = "토요일";}
-$dayT = date('w'); //내일 요일
+    $dayT = date('w'); //내일 요일
     if ($dayT == 0){$dayT = "월요일";}
     else if ($dayT == 1) {$dayT = "화요일";}
     else if ($dayT == 2) {$dayT = "수요일";}
@@ -48,94 +51,232 @@ $dayT = date('w'); //내일 요일
     $tomorrowBreakfast = $todaynumber; //내일 조식(1번쨰)
     $tomorrowDinner = 0; //내일 석식(2번쨰)
     $tomorrowFDinner = 0; //오늘 석식(4번쨰)
-
+//------------------------------------------------------------------------------------------날짜, url, 학식 배열
 // 학식
-if($content == "학식"){
+if($content == "고성 캠퍼스"){
+    $campusDB1 = database(1); //db 기존 삭제 후 1 입력
 echo <<< EOD
     {
         "message": {
-            "text": "캠퍼스를 선택해주세요."
+            "text": "글로벌(고성) 캠퍼스 입니다."
         },
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "글로벌(고성) 캠퍼스",
-                "메트로폴(양주) 캠퍼스",
-                "메디컬(원주) 캠퍼스",
-                "처음으로"
+                "학식",
+                "날씨",
+                "홈페이지",
+                "검색",
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
-}
-
-// 글로벌 캠퍼스(고성)
-elseif(strpos($content, "고성") !== false && strpos($content, "글로벌") !== false  && strpos($content, "캠퍼스") !== false){
+} elseif($content == "양주 캠퍼스"){
+    $campusDB1 = database(2); //db 기존 삭제 후 2 입력
 echo <<< EOD
     {
         "message": {
-            "text": "식당을 선택해주세요."
+            "text": "메트로폴(양주) 캠퍼스 입니다."
         },
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "글로벌 캠퍼스(오늘)",
-                "숭례원(오늘)",
-                "양현원(오늘)",
-                "글로벌 캠퍼스(내일)",
-                "숭례원(내일)",
-                "양현원(내일)",
-                "처음으로"
+                "학식",
+                "날씨",
+                "홈페이지",
+                "검색",
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
-}
-
-// 메트로폴 캠퍼스(양주)
-elseif(strpos($content, "양주") !== false && strpos($content, "메트로폴") !== false  && strpos($content, "캠퍼스") !== false){
+}elseif($content == "원주 캠퍼스"){
+    $campusDB1 = database(3); //db 기존 삭제 후 3 입력
 echo <<< EOD
     {
         "message": {
-           "text": "식당을 선택해주세요."
+            "text": "메디컬(원주) 캠퍼스 입니다."
         },
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "조식&석식(오늘)",
-                "중식&점심특식(오늘)",
-                "조식&석식(내일)",
-                "중식&점심특식(내일)",
-                "처음으로"
+                "학식",
+                "날씨",
+                "홈페이지",
+                "검색",
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
-// 메디컬 캠퍼스(원주)
-elseif(strpos($content, "원주") !== false && strpos($content, "메디컬") !== false  && strpos($content, "캠퍼스") !== false){
-echo <<< EOD
+//------------------------------------------------------------------------------------------캠퍼스 분리
+if($content == "캠퍼스 변경"){
+    echo <<< EOD
     {
         "message": {
-            "text": "식당을 선택해주세요."
+            "text": "캠퍼스를 선택해 주세요."
         },
         "keyboard": { 
             "type": "buttons",
-             "buttons": [
-                "한식&특식(오늘)",
-                "행복 공공 기숙사(오늘)",
-                "한식&특식(내일)",
-                "행복 공공 기숙사(내일)",
+            "buttons": [
+                "고성 캠퍼스",
+                "양주 캠퍼스",
+                "원주 캠퍼스",
                 "처음으로"
             ]
         }
     }
 EOD;
 }
-
-// 글로벌 캠퍼스 학식 메뉴(오늘)
-elseif(strpos($content, "오늘") !== false && strpos($content, "글로벌") !== false && strpos($content, "캠퍼스") !== false){
+//------------------------------------------------------------------------------------------캠퍼스 변경 버튼
+if($campusDB2 == 1){
+    // 학식
+    if($content == "학식"){
+    echo <<< EOD
+        {
+            "message": {
+                "text": "식단을 알고 싶은 식당을 선택해 주세요."
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "해바라기(오늘)",
+                    "숭례원(오늘)",
+                    "양현원(오늘)",
+                    "해바라기(내일)",
+                    "숭례원(내일)",
+                    "양현원(내일)",
+                    "처음으로"
+                ]
+            }
+        }
+EOD;
+    }
+    //날씨
+    elseif($content == "날씨"){
+        $kosong = "Kosong";
+        $weatherData = WeatherData($kosong);
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$weatherData"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+}
+//------------------------------------------------------------------------------------------고성 캠퍼스 버튼
+if($campusDB2 == 2){
+    // 학식
+    if($content == "학식"){
+    echo <<< EOD
+        {
+            "message": {
+                "text": "식단을 알고 싶은 식당을 선택해 주세요."
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "조식&석식(오늘)",
+                    "중식&점심특식(오늘)",
+                    "조식&석식(내일)",
+                    "중식&점심특식(내일)",
+                    "처음으로"
+                ]
+            }
+        }
+EOD;
+    }
+    //날씨
+    elseif($content == "날씨"){
+        $vijongbu = "Vijongbu";
+        $weatherData = WeatherData($vijongbu);
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$weatherData"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+}
+//------------------------------------------------------------------------------------------양주 캠퍼스 버튼
+if($campusDB2 == 3){
+    // 학식
+    if($content == "학식"){
+    echo <<< EOD
+        {
+            "message": {
+                "text": "식단을 알고 싶은 식당을 선택해 주세요."
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "한식&특식(오늘)",
+                    "행복 공공 기숙사(오늘)",
+                    "한식&특식(내일)",
+                    "행복 공공 기숙사(내일)",
+                    "처음으로"
+                ]
+            }
+        }
+EOD;
+    }
+    // 날씨
+    elseif($content == "날씨"){
+        $wonju = "Wonju";
+        $weatherData = WeatherData($wonju);
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$weatherData"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+}
+    
+}
+//------------------------------------------------------------------------------------------원주 캠퍼스 버튼
+// 해바라기 식당 메뉴(오늘)
+if($content == "해바라기(오늘)"){
     
     if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
     else{$todayBreakfast = $todaynumber - 1;}
@@ -145,7 +286,7 @@ elseif(strpos($content, "오늘") !== false && strpos($content, "글로벌") !==
 echo <<< EOD
     {
         "message": {
-            "text": "$today $day \\n$kkk\\n◈글로벌 캠퍼스 학식 메뉴◈\\n$GbTmenu"
+            "text": "$today $day \\n$kkk\\n◈해바라기 식당 메뉴◈\\n$GbTmenu"
         },
         "keyboard": { 
             "type": "buttons",
@@ -154,15 +295,15 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
 // 숭례원 기숙사 조식 석식 메뉴(오늘)
-elseif(strpos($content, "오늘") !== false && strpos($content, "숭례원") !== false){
+elseif($content == "숭례원(오늘)"){
 
     if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
     else{$todayBreakfast = $todaynumber - 1;}
@@ -184,15 +325,15 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
 // 양현원 기숙사 조식 석식 메뉴(오늘)
-elseif(strpos($content, "오늘") !== false && strpos($content, "양현원") !== false){
+elseif($content == "양현원(오늘)"){
 
     if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
     else{$todayBreakfast = $todaynumber - 1;}
@@ -215,22 +356,22 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
-// 글로벌 캠퍼스 학식 메뉴(내일)
-elseif(strpos($content, "내일") !== false && strpos($content, "글로벌") !== false && strpos($content, "캠퍼스") !== false){
+// 해바라기 식당 메뉴(내일)
+elseif($content == "해바라기(내일)"){
 
     $GbMmenu = MenuData($GlobalURL, $tomorrowBreakfast); //캠퍼스 내일 메뉴
 
 echo <<< EOD
     {
         "message": {
-            "text": "$tomorrow $dayT \\n$kkk\\n◈글로벌 캠퍼스 학식 메뉴◈\\n$GbMmenu"
+            "text": "$tomorrow $dayT \\n$kkk\\n◈해바라기 식당 메뉴◈\\n$GbMmenu"
         },
         "keyboard": { 
             "type": "buttons",
@@ -239,15 +380,15 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
 // 숭례원 기숙사 조식 석식 메뉴(내일)
-elseif(strpos($content, "내일") !== false && strpos($content, "숭례원") !== false){
+elseif($content == "숭례원(내일)"){
    
     if($todaynumber){$tomorrowDinner = $todaynumber + 7;}
 
@@ -266,15 +407,15 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
 // 양현원 기숙사 조식 석식 메뉴(내일)
-elseif(strpos($content, "내일") !== false && strpos($content, "양현원") !== false){
+elseif($content == "양현원(내일)"){
 
     if($todaynumber){$tomorrowDinner = $todaynumber + 7;}
 
@@ -293,15 +434,16 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
+//------------------------------------------------------------------------------------------고성 캠퍼스 학식
 // 메트로폴 캠퍼스(양주) 조식 &석식 (오늘)
-elseif(strpos($content, "조식") !== false && strpos($content, "석식") !== false && strpos($content, "오늘") !== false){
+if($content == "조식&석식(오늘)"){
     
     if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
     else{$todayBreakfast = $todaynumber - 1;}
@@ -323,15 +465,15 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
 // 메트로폴 캠퍼스(양주) 중식 &점식특식 (오늘)
-elseif(strpos($content, "중식") !== false && strpos($content, "점심") !== false && strpos($content, "특식") !== false && strpos($content, "오늘") !== false){
+elseif($content == "중식&점심특식(오늘)"){
     
     if($todaynumber == 0){$todayBreakfast = $todaynumber + 13;}
     else{$todayBreakfast = $todaynumber + 6;}
@@ -353,15 +495,15 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
 // 메트로폴 캠퍼스(양주) 조식 &석식 (내일)
-elseif(strpos($content, "조식") !== false && strpos($content, "석식") !== false && strpos($content, "내일") !== false){
+elseif($content == "조식&석식(내일)"){
     if($todaynumber){$tomorrowFDinner = $todaynumber + 21;}
 
     $MtBMmenu = MenuData($MtrURL, $tomorrowBreakfast); //캠퍼스 오늘 조식 메뉴
@@ -378,15 +520,15 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
 // 메트로폴 캠퍼스(양주) 중식 &점식특식 (내일)
-elseif(strpos($content, "중식") !== false && strpos($content, "점심") !== false && strpos($content, "특식") !== false && strpos($content, "내일") !== false){
+elseif($content == "중식&점심특식(내일)"){
     
     if($todaynumber == 0){$tomorrowBreakfast = $todaynumber + 7;}
     else{$todayBreakfast = $todaynumber + 7;}
@@ -408,15 +550,16 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
+//------------------------------------------------------------------------------------------양주 캠퍼스 학식
 // 문막 학식 한식 특식 메뉴(오늘)
-elseif(strpos($content, "한식") !== false && strpos($content, "특식") !== false && strpos($content, "오늘") !== false){
+if($content == "한식&특식(오늘)"){
    
     if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
     else{$todayBreakfast = $todaynumber - 1;}
@@ -439,7 +582,8 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
@@ -447,7 +591,7 @@ EOD;
 }
 
 // 문막 기숙사 조식 석식 메뉴(오늘)
-elseif(strpos($content, "행복") !== false && strpos($content, "공공") !== false && strpos($content, "기숙사") !== false && strpos($content, "오늘") !== false){
+elseif($content == "행복 공공 기숙사(오늘)"){
    
     if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
     else{$todayBreakfast = $todaynumber - 1;}
@@ -470,7 +614,8 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
@@ -478,7 +623,7 @@ EOD;
 }
 
 // 문막 학식 한식 특식 메뉴(내일)
-elseif(strpos($content, "한식") !== false && strpos($content, "특식") !== false && strpos($content, "내일") !== false){
+elseif($content == "한식&특식(내일)"){
    
     if($todaynumber){$tomorrowDinner = $todaynumber + 7;}
 
@@ -497,7 +642,8 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
@@ -505,7 +651,7 @@ EOD;
 }
 
 // 문막 기숙사 조식 석식 메뉴(내일)
-elseif(strpos($content, "행복") !== false && strpos($content, "공공") !== false && strpos($content, "기숙사") !== false && strpos($content, "내일") !== false){
+elseif($content == "행복 공공 기숙사(내일)"){
    
     if($todaynumber){$tomorrowDinner = $todaynumber + 7;}
 
@@ -524,96 +670,14 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
-// 날씨
-if($content == "날씨"){
-echo <<< EOD
-    {
-        "message": {
-            "text": "지역을 선택하세요."
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "고성 날씨",
-                "양주 날씨",
-                "원주 날씨",
-                "처음으로"
-            ]
-        }
-    }
-EOD;
-}
-elseif(strpos($content, "고성") !== false && strpos($content, "날씨") !== false){
-    $kosong = "Kosong";
-    $weatherData = WeatherData($kosong);
-echo <<< EOD
-    {
-        "message": {
-            "text": "$weatherData"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기"
-            ]
-        }
-    }
-EOD;
-}
-elseif(strpos($content, "양주") !== false && strpos($content, "날씨") !== false){
-    $vijongbu = "Vijongbu";
-    $weatherData = WeatherData($vijongbu);
-echo <<< EOD
-    {
-        "message": {
-            "text": "$weatherData"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기"
-            ]
-        }
-    }
-EOD;
-}
-elseif(strpos($content, "원주") !== false && strpos($content, "날씨") !== false){
-    $wonju = "Wonju";
-    $weatherData = WeatherData($wonju);
-echo <<< EOD
-    {
-        "message": {
-            "text": "$weatherData"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기"
-            ]
-        }
-    }
-EOD;
-}
-
+//------------------------------------------------------------------------------------------원주 캠퍼스 학식
 // 홈페이지
 if($content == "홈페이지"){
 echo <<< EOD
@@ -624,7 +688,7 @@ echo <<< EOD
         "keyboard": { 
             "type": "buttons",
             "buttons": [
-                "학교홈페이지",
+                "메인페이지",
                 "포털시스템",
                 "스마트출결시스템",
                 "교내연락처",
@@ -635,8 +699,8 @@ echo <<< EOD
 EOD;
 }
 
-//홈페이지-학교홈페이지
-elseif(strpos($content, "학교") !== false && strpos($content, "홈페이지") !== false){
+//홈페이지-메인페이지
+elseif($content == "메인페이지"){
 echo <<< EOD
     {
         "message": {
@@ -649,7 +713,8 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
@@ -657,7 +722,7 @@ EOD;
 }
 
 // 홈페이지-포털시스템
-elseif(strpos($content, "포털") !== false && strpos($content, "시스템") !== false){
+elseif($content == "포털시스템"){
 echo <<< EOD
     {
         "message": {
@@ -670,7 +735,8 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
@@ -678,7 +744,7 @@ EOD;
 }
 
 // 홈페이지-스마트출결시스템
-elseif(strpos($content, "출결") && strpos($content, "시스템") !== false){
+elseif($content == "스마트출결시스템"){
 echo <<< EOD
     {
         "message": {
@@ -691,7 +757,8 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
@@ -699,7 +766,7 @@ EOD;
 }
 
 // 홈페이지-교내연락처
-elseif(strpos($content, "교내") !== false && strpos($content, "연락처") !== false){
+elseif($content == "교내연락처"){
 echo <<< EOD
     {
         "message": {
@@ -712,13 +779,14 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
 EOD;
 }
-
+//------------------------------------------------------------------------------------------홈페이지
 // 건의하기
 if(strpos($content, "건의") !== false){
 echo <<< EOD
@@ -733,7 +801,8 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
@@ -754,7 +823,8 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }
@@ -785,7 +855,8 @@ echo <<< EOD
                 "날씨",
                 "홈페이지",
                 "검색",
-                "건의하기"
+                "건의하기",
+                "캠퍼스 변경"
             ]
         }
     }

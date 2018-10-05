@@ -1,6 +1,5 @@
 {
     "require": {
-        "cmfcmf/openweathermap-php-api": "^2.3",
-        "chicpro/php-kakao-translate": "^1.0"
+        "cmfcmf/openweathermap-php-api": "^2.3"
     }
 }
