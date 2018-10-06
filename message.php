@@ -5,8 +5,11 @@ include "include/campusdb.php";
 
 $data = json_decode(file_get_contents('php://input'),true);
 $content = $data["content"];
+$user_key = $data["user_key"];
 
-$campusDB2 = database2(); //캠퍼스 db 출력
+//user_DB, numberUpdate_DB, print_DB
+$user_DB = user_DB($user_key); //DB 테이블 안에 유저키 넣기
+$print_DB = print_DB($user_key);//DB 유저키에 해당하는 number를 출력하라
 
 $kkk = "------------------------------";
 
@@ -54,7 +57,7 @@ $day = date('w'); //오늘 요일
 //------------------------------------------------------------------------------------------날짜, url, 학식 배열
 // 학식
 if($content == "고성 캠퍼스"){
-    $campusDB1 = database(1); //db 기존 삭제 후 1 입력
+    $numberUpdate_DB = numberUpdate_DB($user_key, 1); //DB 유저키에 해당하는 number를 1로 바꿔라
 echo <<< EOD
     {
         "message": {
@@ -74,7 +77,7 @@ echo <<< EOD
     }
 EOD;
 } elseif($content == "양주 캠퍼스"){
-    $campusDB1 = database(2); //db 기존 삭제 후 2 입력
+    $numberUpdate_DB = numberUpdate_DB($user_key, 2); //DB 유저키에 해당하는 number를 2로 바꿔라
 echo <<< EOD
     {
         "message": {
@@ -94,7 +97,7 @@ echo <<< EOD
     }
 EOD;
 }elseif($content == "원주 캠퍼스"){
-    $campusDB1 = database(3); //db 기존 삭제 후 3 입력
+    $numberUpdate_DB = numberUpdate_DB($user_key, 3); //DB 유저키에 해당하는 number를 3로 바꿔라
 echo <<< EOD
     {
         "message": {
@@ -134,7 +137,7 @@ if($content == "캠퍼스 변경"){
 EOD;
 }
 //------------------------------------------------------------------------------------------캠퍼스 변경 버튼
-if($campusDB2 == 1){
+if($print_DB == 1){
     // 학식
     if($content == "학식"){
     echo <<< EOD
@@ -182,7 +185,7 @@ EOD;
     }
 }
 //------------------------------------------------------------------------------------------고성 캠퍼스 버튼
-if($campusDB2 == 2){
+if($print_DB == 2){
     // 학식
     if($content == "학식"){
     echo <<< EOD
@@ -228,7 +231,7 @@ EOD;
     }
 }
 //------------------------------------------------------------------------------------------양주 캠퍼스 버튼
-if($campusDB2 == 3){
+if($print_DB == 3){
     // 학식
     if($content == "학식"){
     echo <<< EOD
