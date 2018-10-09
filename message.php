@@ -8,7 +8,6 @@ $content = $data["content"];
 $user_key = $data["user_key"];
 
 //user_DB, numberUpdate_DB, print_DB
-$user_DB = user_DB($user_key); //DB 테이블 안에 유저키 넣기
 $print_DB = print_DB($user_key);//DB 유저키에 해당하는 number를 출력하라
 
 $kkk = "------------------------------";
@@ -57,7 +56,7 @@ $day = date('w'); //오늘 요일
 //------------------------------------------------------------------------------------------날짜, url, 학식 배열
 // 학식
 if($content == "고성 캠퍼스"){
-    $numberUpdate_DB = numberUpdate_DB($user_key, 1); //DB 유저키에 해당하는 number를 1로 바꿔라
+    $user_DB = user_DB($user_key, 1); //DB 테이블 안에 유저키 넣기, 해당 유저키 number 1로 변경
 echo <<< EOD
     {
         "message": {
@@ -77,7 +76,7 @@ echo <<< EOD
     }
 EOD;
 } elseif($content == "양주 캠퍼스"){
-    $numberUpdate_DB = numberUpdate_DB($user_key, 2); //DB 유저키에 해당하는 number를 2로 바꿔라
+    $user_DB = user_DB($user_key, 2); //DB 테이블 안에 유저키 넣기, 해당 유저키 number 2로 변경
 echo <<< EOD
     {
         "message": {
@@ -97,7 +96,7 @@ echo <<< EOD
     }
 EOD;
 }elseif($content == "원주 캠퍼스"){
-    $numberUpdate_DB = numberUpdate_DB($user_key, 3); //DB 유저키에 해당하는 number를 3로 바꿔라
+    $user_DB = user_DB($user_key, 3); //DB 테이블 안에 유저키 넣기, 해당 유저키 number 3으로 변경
 echo <<< EOD
     {
         "message": {
@@ -183,9 +182,175 @@ EOD;
         }
 EOD;
     }
+        // 해바라기 식당 메뉴(오늘)
+    if($content == "해바라기(오늘)"){
+        
+        if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
+        else{$todayBreakfast = $todaynumber - 1;}
+
+        $GbTmenu = MenuData($GlobalURL, $todayBreakfast); //캠퍼스 오늘 메뉴
+
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$today $day \\n$kkk\\n◈해바라기 식당 메뉴◈\\n$GbTmenu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+    // 숭례원 기숙사 조식 석식 메뉴(오늘)
+    elseif($content == "숭례원(오늘)"){
+
+        if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
+        else{$todayBreakfast = $todaynumber - 1;}
+
+        if($todaynumber == 0){$todayDinner = $todaynumber + 13;}
+        else{$todayDinner = $todaynumber +6;}
+
+        $SrTDmenu = MenuData($SrwURL, $todayBreakfast);
+        $SrTNmenu = MenuData($SrwURL, $todayDinner);
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$today $day \\n$kkk\\n◈숭례원 조식 메뉴◈\\n $SrTDmenu \\n$kkk\\n◈숭례원 석식 메뉴◈\\n $SrTNmenu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+    // 양현원 기숙사 조식 석식 메뉴(오늘)
+    elseif($content == "양현원(오늘)"){
+
+        if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
+        else{$todayBreakfast = $todaynumber - 1;}
+
+        if($todaynumber == 0){$todayDinner = $todaynumber + 13;}
+        else{$todayDinner = $todaynumber +6;}
+
+        $YhTDmenu = MenuData($YhwURL, $todayBreakfast); //양현원 오늘 조식
+        $YhTNmenu = MenuData($YhwURL, $todayDinner); //양현원 오늘 석식
+
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$today $day \\n$kkk\\n◈양현원 조식 메뉴◈\\n $YhTDmenu \\n$kkk\\n◈양현원 석식 메뉴◈\\n $YhTNmenu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+    // 해바라기 식당 메뉴(내일)
+    elseif($content == "해바라기(내일)"){
+
+        $GbMmenu = MenuData($GlobalURL, $tomorrowBreakfast); //캠퍼스 내일 메뉴
+
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$tomorrow $dayT \\n$kkk\\n◈해바라기 식당 메뉴◈\\n$GbMmenu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+    // 숭례원 기숙사 조식 석식 메뉴(내일)
+    elseif($content == "숭례원(내일)"){
+    
+        if($todaynumber){$tomorrowDinner = $todaynumber + 7;}
+
+        $SrMDmenu = MenuData($SrwURL, $tomorrowBreakfast); //숭례원 내일 조식
+        $SrMNmenu = MenuData($SrwURL, $tomorrowDinner); //숭례원 내일 석식
+
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$tomorrow $dayT \\n$kkk\\n◈숭례원 조식 메뉴◈\\n $SrMDmenu \\n$kkk\\n◈숭례원 석식 메뉴◈\\n $SrMNmenu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+    // 양현원 기숙사 조식 석식 메뉴(내일)
+    elseif($content == "양현원(내일)"){
+
+        if($todaynumber){$tomorrowDinner = $todaynumber + 7;}
+
+        $YhMDmenu = MenuData($YhwURL, $tomorrowBreakfast); //양현원 내일 조식
+        $YhMNmenu = MenuData($YhwURL, $tomorrowDinner); //양현원 내일 석식
+
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$tomorrow $dayT \\n$kkk\\n◈양현원 조식 메뉴◈\\n $YhMDmenu \\n$kkk\\n◈양현원 석식 메뉴◈\\n $YhMNmenu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
 }
 //------------------------------------------------------------------------------------------고성 캠퍼스 버튼
-if($print_DB == 2){
+elseif($print_DB == 2){
     // 학식
     if($content == "학식"){
     echo <<< EOD
@@ -229,9 +394,124 @@ EOD;
         }
 EOD;
     }
+    // 메트로폴 캠퍼스(양주) 조식 &석식 (오늘)
+    if($content == "조식&석식(오늘)"){
+        
+        if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
+        else{$todayBreakfast = $todaynumber - 1;}
+
+        if($todaynumber == 0){$todayFDinner = $todaynumber + 27;}
+        else{$todayFDinner = $todaynumber + 20;}
+
+        $MtBTmenu = MenuData($MtrURL, $todayBreakfast); //캠퍼스 오늘 조식 메뉴
+        $MtDTmenu = MenuData($MtrURL, $todayFDinner); //캠퍼스 오늘 석식 메뉴
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$today $day \\n$kkk\\n◈메트로폴 조식 메뉴◈\\n $MtBTmenu \\n$kkk\\n◈메트로폴 석식 메뉴◈\\n $MtDTmenu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+    // 메트로폴 캠퍼스(양주) 중식 &점식특식 (오늘)
+    elseif($content == "중식&점심특식(오늘)"){
+        
+        if($todaynumber == 0){$todayBreakfast = $todaynumber + 13;}
+        else{$todayBreakfast = $todaynumber + 6;}
+
+        if($todaynumber == 0){$todayFDinner = $todaynumber + 20;}
+        else{$todayFDinner = $todaynumber + 13;}
+
+        $MtBTmenu = MenuData($MtrURL, $todayBreakfast); //캠퍼스 오늘 중식 메뉴
+        $MtDTmenu = MenuData($MtrURL, $todayFDinner); //캠퍼스 오늘 점심특식 메뉴
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$today $day \\n$kkk\\n◈메트로폴 중식 메뉴◈\\n $MtBTmenu \\n$kkk\\n◈메트로폴 점심특식 메뉴◈\\n $MtDTmenu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+    // 메트로폴 캠퍼스(양주) 조식 &석식 (내일)
+    elseif($content == "조식&석식(내일)"){
+        if($todaynumber){$tomorrowFDinner = $todaynumber + 21;}
+
+        $MtBMmenu = MenuData($MtrURL, $tomorrowBreakfast); //캠퍼스 오늘 조식 메뉴
+        $MtDMmenu = MenuData($MtrURL, $tomorrowFDinner); //캠퍼스 오늘 석식 메뉴
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$tomorrow $dayT \\n$kkk\\n◈메트로폴 조식 메뉴◈\\n $MtBMmenu \\n$kkk\\n◈메트로폴 석식 메뉴◈\\n $MtDMmenu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+    // 메트로폴 캠퍼스(양주) 중식 &점식특식 (내일)
+    elseif($content == "중식&점심특식(내일)"){
+        
+        if($todaynumber == 0){$tomorrowBreakfast = $todaynumber + 7;}
+        else{$todayBreakfast = $todaynumber + 7;}
+
+        if($todaynumber == 0){$tomorrowDinner = $todaynumber + 14;}
+        else{$todayFDinner = $todaynumber + 14;}
+
+        $MtBTmenu = MenuData($MtrURL, $todayBreakfast); //캠퍼스 오늘 중식 메뉴
+        $MtDTmenu = MenuData($MtrURL, $todayFDinner); //캠퍼스 오늘 점심특식 메뉴
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$tomorrow $dayT \\n$kkk\\n◈메트로폴 중식 메뉴◈\\n $MtBTmenu \\n$kkk\\n◈메트로폴 점심특식 메뉴◈\\n $MtDTmenu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
 }
 //------------------------------------------------------------------------------------------양주 캠퍼스 버튼
-if($print_DB == 3){
+elseif($print_DB == 3){
     // 학식
     if($content == "학식"){
     echo <<< EOD
@@ -274,413 +554,129 @@ EOD;
             }
         }
 EOD;
-}
+    }
+    // 문막 학식 한식 특식 메뉴(오늘)
+    if($content == "한식&특식(오늘)"){
     
+        if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
+        else{$todayBreakfast = $todaynumber - 1;}
+
+        if($todaynumber == 0){$todayDinner = $todaynumber + 13;}
+        else{$todayDinner = $todaynumber +6;}
+
+        $Mdcmenu = MenuData($MdcURL, $todayBreakfast); //캠퍼스 오늘 한식 메뉴
+        $MdcGmenu = MenuData($MdcURL, $todayDinner); //캠퍼스 오늘 특식 메뉴
+
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$today $day \\n$kkk\\n◈메디컬 한식 메뉴◈\\n $Mdcmenu \\n$kkk\\n◈메디컬 특식 메뉴◈\\n $MdcGmenu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+
+    // 문막 기숙사 조식 석식 메뉴(오늘)
+    elseif($content == "행복 공공 기숙사(오늘)"){
+    
+        if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
+        else{$todayBreakfast = $todaynumber - 1;}
+
+        if($todaynumber == 0){$todayDinner = $todaynumber + 13;}
+        else{$todayDinner = $todaynumber +6;}
+
+        $Mdcmenu = MenuData($MdcGURL, $todayBreakfast); //기숙사 오늘 조식 메뉴
+        $MdcGmenu = MenuData($MdcGURL, $todayDinner); //기숙사 오늘 석식 메뉴
+
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$today $day \\n$kkk\\n◈행복 공공 기숙사 조식 메뉴◈\\n $Mdcmenu \\n$kkk\\n◈행복 공공 기숙사 석식 메뉴◈\\n $MdcGmenu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+
+    // 문막 학식 한식 특식 메뉴(내일)
+    elseif($content == "한식&특식(내일)"){
+    
+        if($todaynumber){$tomorrowDinner = $todaynumber + 7;}
+
+        $Mdcmenu = MenuData($MdcURL, $tomorrowBreakfast); //캠퍼스 내일 한식
+        $Mdc2menu = MenuData($MdcURL, $tomorrowDinner); //캠퍼스 내일 특식
+
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$tomorrow $dayT \\n$kkk\\n◈메디컬 한식 메뉴◈\\n $Mdcmenu \\n$kkk\\n◈메디컬 특식 메뉴◈\\n $Mdc2menu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+
+    // 문막 기숙사 조식 석식 메뉴(내일)
+    elseif($content == "행복 공공 기숙사(내일)"){
+    
+        if($todaynumber){$tomorrowDinner = $todaynumber + 7;}
+
+        $Gssmenu = MenuData($MdcGURL, $tomorrowBreakfast); //문막 기숙사 내일 조식
+        $Gss2menu = MenuData($MdcGURL, $tomorrowDinner); //문막 기숙사 내일 석식
+
+    echo <<< EOD
+        {
+            "message": {
+                "text": "$tomorrow $dayT \\n$kkk\\n◈행복 공공 기숙사 조식 메뉴◈\\n $Gssmenu \\n$kkk\\n◈행복 공공 기숙사 석식 메뉴◈\\n $Gss2menu"
+            },
+            "keyboard": { 
+                "type": "buttons",
+                "buttons": [
+                    "학식",
+                    "날씨",
+                    "홈페이지",
+                    "검색",
+                    "건의하기",
+                    "캠퍼스 변경"
+                ]
+            }
+        }
+EOD;
+    }
+        
 }
 //------------------------------------------------------------------------------------------원주 캠퍼스 버튼
-// 해바라기 식당 메뉴(오늘)
-if($content == "해바라기(오늘)"){
-    
-    if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
-    else{$todayBreakfast = $todaynumber - 1;}
-
-    $GbTmenu = MenuData($GlobalURL, $todayBreakfast); //캠퍼스 오늘 메뉴
-
-echo <<< EOD
-    {
-        "message": {
-            "text": "$today $day \\n$kkk\\n◈해바라기 식당 메뉴◈\\n$GbTmenu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-// 숭례원 기숙사 조식 석식 메뉴(오늘)
-elseif($content == "숭례원(오늘)"){
-
-    if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
-    else{$todayBreakfast = $todaynumber - 1;}
-
-    if($todaynumber == 0){$todayDinner = $todaynumber + 13;}
-    else{$todayDinner = $todaynumber +6;}
-
-    $SrTDmenu = MenuData($SrwURL, $todayBreakfast);
-    $SrTNmenu = MenuData($SrwURL, $todayDinner);
-echo <<< EOD
-    {
-        "message": {
-            "text": "$today $day \\n$kkk\\n◈숭례원 조식 메뉴◈\\n $SrTDmenu \\n$kkk\\n◈숭례원 석식 메뉴◈\\n $SrTNmenu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-// 양현원 기숙사 조식 석식 메뉴(오늘)
-elseif($content == "양현원(오늘)"){
-
-    if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
-    else{$todayBreakfast = $todaynumber - 1;}
-
-    if($todaynumber == 0){$todayDinner = $todaynumber + 13;}
-    else{$todayDinner = $todaynumber +6;}
-
-    $YhTDmenu = MenuData($YhwURL, $todayBreakfast); //양현원 오늘 조식
-    $YhTNmenu = MenuData($YhwURL, $todayDinner); //양현원 오늘 석식
-
-echo <<< EOD
-    {
-        "message": {
-            "text": "$today $day \\n$kkk\\n◈양현원 조식 메뉴◈\\n $YhTDmenu \\n$kkk\\n◈양현원 석식 메뉴◈\\n $YhTNmenu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-// 해바라기 식당 메뉴(내일)
-elseif($content == "해바라기(내일)"){
-
-    $GbMmenu = MenuData($GlobalURL, $tomorrowBreakfast); //캠퍼스 내일 메뉴
-
-echo <<< EOD
-    {
-        "message": {
-            "text": "$tomorrow $dayT \\n$kkk\\n◈해바라기 식당 메뉴◈\\n$GbMmenu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-// 숭례원 기숙사 조식 석식 메뉴(내일)
-elseif($content == "숭례원(내일)"){
-   
-    if($todaynumber){$tomorrowDinner = $todaynumber + 7;}
-
-    $SrMDmenu = MenuData($SrwURL, $tomorrowBreakfast); //숭례원 내일 조식
-    $SrMNmenu = MenuData($SrwURL, $tomorrowDinner); //숭례원 내일 석식
-
-echo <<< EOD
-    {
-        "message": {
-            "text": "$tomorrow $dayT \\n$kkk\\n◈숭례원 조식 메뉴◈\\n $SrMDmenu \\n$kkk\\n◈숭례원 석식 메뉴◈\\n $SrMNmenu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-// 양현원 기숙사 조식 석식 메뉴(내일)
-elseif($content == "양현원(내일)"){
-
-    if($todaynumber){$tomorrowDinner = $todaynumber + 7;}
-
-    $YhMDmenu = MenuData($YhwURL, $tomorrowBreakfast); //양현원 내일 조식
-    $YhMNmenu = MenuData($YhwURL, $tomorrowDinner); //양현원 내일 석식
-
-echo <<< EOD
-    {
-        "message": {
-            "text": "$tomorrow $dayT \\n$kkk\\n◈양현원 조식 메뉴◈\\n $YhMDmenu \\n$kkk\\n◈양현원 석식 메뉴◈\\n $YhMNmenu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-//------------------------------------------------------------------------------------------고성 캠퍼스 학식
-// 메트로폴 캠퍼스(양주) 조식 &석식 (오늘)
-if($content == "조식&석식(오늘)"){
-    
-    if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
-    else{$todayBreakfast = $todaynumber - 1;}
-
-    if($todaynumber == 0){$todayFDinner = $todaynumber + 27;}
-    else{$todayFDinner = $todaynumber + 20;}
-
-    $MtBTmenu = MenuData($MtrURL, $todayBreakfast); //캠퍼스 오늘 조식 메뉴
-    $MtDTmenu = MenuData($MtrURL, $todayFDinner); //캠퍼스 오늘 석식 메뉴
-echo <<< EOD
-    {
-        "message": {
-            "text": "$today $day \\n$kkk\\n◈메트로폴 조식 메뉴◈\\n $MtBTmenu \\n$kkk\\n◈메트로폴 석식 메뉴◈\\n $MtDTmenu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-// 메트로폴 캠퍼스(양주) 중식 &점식특식 (오늘)
-elseif($content == "중식&점심특식(오늘)"){
-    
-    if($todaynumber == 0){$todayBreakfast = $todaynumber + 13;}
-    else{$todayBreakfast = $todaynumber + 6;}
-
-    if($todaynumber == 0){$todayFDinner = $todaynumber + 20;}
-    else{$todayFDinner = $todaynumber + 13;}
-
-    $MtBTmenu = MenuData($MtrURL, $todayBreakfast); //캠퍼스 오늘 중식 메뉴
-    $MtDTmenu = MenuData($MtrURL, $todayFDinner); //캠퍼스 오늘 점심특식 메뉴
-echo <<< EOD
-    {
-        "message": {
-            "text": "$today $day \\n$kkk\\n◈메트로폴 중식 메뉴◈\\n $MtBTmenu \\n$kkk\\n◈메트로폴 점심특식 메뉴◈\\n $MtDTmenu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-// 메트로폴 캠퍼스(양주) 조식 &석식 (내일)
-elseif($content == "조식&석식(내일)"){
-    if($todaynumber){$tomorrowFDinner = $todaynumber + 21;}
-
-    $MtBMmenu = MenuData($MtrURL, $tomorrowBreakfast); //캠퍼스 오늘 조식 메뉴
-    $MtDMmenu = MenuData($MtrURL, $tomorrowFDinner); //캠퍼스 오늘 석식 메뉴
-echo <<< EOD
-    {
-        "message": {
-            "text": "$tomorrow $dayT \\n$kkk\\n◈메트로폴 조식 메뉴◈\\n $MtBMmenu \\n$kkk\\n◈메트로폴 석식 메뉴◈\\n $MtDMmenu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-// 메트로폴 캠퍼스(양주) 중식 &점식특식 (내일)
-elseif($content == "중식&점심특식(내일)"){
-    
-    if($todaynumber == 0){$tomorrowBreakfast = $todaynumber + 7;}
-    else{$todayBreakfast = $todaynumber + 7;}
-
-    if($todaynumber == 0){$tomorrowDinner = $todaynumber + 14;}
-    else{$todayFDinner = $todaynumber + 14;}
-
-    $MtBTmenu = MenuData($MtrURL, $todayBreakfast); //캠퍼스 오늘 중식 메뉴
-    $MtDTmenu = MenuData($MtrURL, $todayFDinner); //캠퍼스 오늘 점심특식 메뉴
-echo <<< EOD
-    {
-        "message": {
-            "text": "$tomorrow $dayT \\n$kkk\\n◈메트로폴 중식 메뉴◈\\n $MtBTmenu \\n$kkk\\n◈메트로폴 점심특식 메뉴◈\\n $MtDTmenu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-//------------------------------------------------------------------------------------------양주 캠퍼스 학식
-// 문막 학식 한식 특식 메뉴(오늘)
-if($content == "한식&특식(오늘)"){
-   
-    if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
-    else{$todayBreakfast = $todaynumber - 1;}
-
-    if($todaynumber == 0){$todayDinner = $todaynumber + 13;}
-    else{$todayDinner = $todaynumber +6;}
-
-    $Mdcmenu = MenuData($MdcURL, $todayBreakfast); //캠퍼스 오늘 한식 메뉴
-    $MdcGmenu = MenuData($MdcURL, $todayDinner); //캠퍼스 오늘 특식 메뉴
-
-echo <<< EOD
-    {
-        "message": {
-            "text": "$today $day \\n$kkk\\n◈메디컬 한식 메뉴◈\\n $Mdcmenu \\n$kkk\\n◈메디컬 특식 메뉴◈\\n $MdcGmenu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-
-// 문막 기숙사 조식 석식 메뉴(오늘)
-elseif($content == "행복 공공 기숙사(오늘)"){
-   
-    if($todaynumber == 0){$todayBreakfast = $todaynumber + 6;}
-    else{$todayBreakfast = $todaynumber - 1;}
-
-    if($todaynumber == 0){$todayDinner = $todaynumber + 13;}
-    else{$todayDinner = $todaynumber +6;}
-
-    $Mdcmenu = MenuData($MdcGURL, $todayBreakfast); //기숙사 오늘 조식 메뉴
-    $MdcGmenu = MenuData($MdcGURL, $todayDinner); //기숙사 오늘 석식 메뉴
-
-echo <<< EOD
-    {
-        "message": {
-            "text": "$today $day \\n$kkk\\n◈행복 공공 기숙사 조식 메뉴◈\\n $Mdcmenu \\n$kkk\\n◈행복 공공 기숙사 석식 메뉴◈\\n $MdcGmenu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-
-// 문막 학식 한식 특식 메뉴(내일)
-elseif($content == "한식&특식(내일)"){
-   
-    if($todaynumber){$tomorrowDinner = $todaynumber + 7;}
-
-    $Mdcmenu = MenuData($MdcURL, $tomorrowBreakfast); //캠퍼스 내일 한식
-    $Mdc2menu = MenuData($MdcURL, $tomorrowDinner); //캠퍼스 내일 특식
-
-echo <<< EOD
-    {
-        "message": {
-            "text": "$tomorrow $dayT \\n$kkk\\n◈메디컬 한식 메뉴◈\\n $Mdcmenu \\n$kkk\\n◈메디컬 특식 메뉴◈\\n $Mdc2menu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-
-// 문막 기숙사 조식 석식 메뉴(내일)
-elseif($content == "행복 공공 기숙사(내일)"){
-   
-    if($todaynumber){$tomorrowDinner = $todaynumber + 7;}
-
-    $Gssmenu = MenuData($MdcGURL, $tomorrowBreakfast); //문막 기숙사 내일 조식
-    $Gss2menu = MenuData($MdcGURL, $tomorrowDinner); //문막 기숙사 내일 석식
-
-echo <<< EOD
-    {
-        "message": {
-            "text": "$tomorrow $dayT \\n$kkk\\n◈행복 공공 기숙사 조식 메뉴◈\\n $Gssmenu \\n$kkk\\n◈행복 공공 기숙사 석식 메뉴◈\\n $Gss2menu"
-        },
-        "keyboard": { 
-            "type": "buttons",
-            "buttons": [
-                "학식",
-                "날씨",
-                "홈페이지",
-                "검색",
-                "건의하기",
-                "캠퍼스 변경"
-            ]
-        }
-    }
-EOD;
-}
-//------------------------------------------------------------------------------------------원주 캠퍼스 학식
 // 홈페이지
 if($content == "홈페이지"){
 echo <<< EOD
@@ -703,7 +699,7 @@ EOD;
 }
 
 //홈페이지-메인페이지
-elseif($content == "메인페이지"){
+if($content == "메인페이지"){
 echo <<< EOD
     {
         "message": {
@@ -813,7 +809,7 @@ EOD;
 }
 
 // 처음으로
-elseif($content == "처음으로"){
+if($content == "처음으로"){
 echo <<< EOD
     {
         "message": {
@@ -849,7 +845,7 @@ else {
 echo <<< EOD
     {
         "message": {
-            "text": "개발중인 기능이거나 \\n잘못된 입력입니다."
+            "text": "개발중인 기능이거나 \\n잘못된 입력입니다. \\n채팅방을 나갔다 오면 괜찮을 수 있어요!"
         }, 
         "keyboard": { 
             "type": "buttons",
