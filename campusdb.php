@@ -1,9 +1,9 @@
 <?php
 function user_DB($user, $number) {
     $db_host = "localhost"; 
-    $db_user = "rlagywo23"; 
-    $db_passwd = "goddog123";
-    $db_name = "rlagywo23";
+    $db_user = "ID"; 
+    $db_passwd = "PASSWORD";
+    $db_name = "DB_NAME";
 
     // MySQL - DB 접속.
     $conn = mysqli_connect($db_host,$db_user,$db_passwd,$db_name);
