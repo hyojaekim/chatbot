@@ -28,3 +28,7 @@ dothome (FileZilla)
 ![2](https://user-images.githubusercontent.com/41109150/43906319-f652f8c8-9c2d-11e8-8876-6c1a2d523395.png)
 ![3](https://user-images.githubusercontent.com/41109150/43906324-f7aa4a32-9c2d-11e8-8291-97e77b140936.png)
 ![4](https://user-images.githubusercontent.com/41109150/43906329-f8cef87c-9c2d-11e8-9931-0d6414745487.png)
+
+### TODO
+- 파이썬으로 변경하기
+- 새로운 서버 이용하기
