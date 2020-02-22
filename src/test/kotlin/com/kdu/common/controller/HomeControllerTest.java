@@ -14,7 +14,7 @@ class HomeControllerTest {
     @Test
     void 정상적으로_홈으로_이동한다() {
         webTestClient.get()
-                .uri("/")
+                .uri("/home")
                 .exchange()
                 .expectStatus()
                 .isOk();
