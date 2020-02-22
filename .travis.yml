@@ -14,11 +14,10 @@ cache:
 
 script: "./gradlew clean build"
 
-# CI 실행 완료시 메일로 알람
-notifications:
-  email:
-    recipients:
-      - hyojaedev@gmail.com
+before_deploy:
+  - zip -r kdu-chatbot-service *
+  - mkdir -p deploy
+  - mv kdu-chatbot-service.zip deploy/kdu-chatbot-service.zip
 
 deploy:
   - provider: s3
@@ -29,6 +28,13 @@ deploy:
     skip_cleanup: true
     acl: public_read
     wait-until-deployed: true
+    local_dir: deploy # before_deploy에서 생성한 디렉토리
     on:
       repo: hyojaekim/chatbot #Github 주소
       branch: master
+
+# CI 실행 완료시 메일로 알람
+notifications:
+  email:
+    recipients:
+      - hyojaedev@gmail.com
