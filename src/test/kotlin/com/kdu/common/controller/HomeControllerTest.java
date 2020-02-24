@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class HomeControllerTest {
 
@@ -13,10 +15,15 @@ class HomeControllerTest {
 
     @Test
     void 정상적으로_홈으로_이동한다() {
-        webTestClient.get()
+        String result = webTestClient.get()
                 .uri("/home")
                 .exchange()
                 .expectStatus()
-                .isOk();
+                .isOk()
+                .expectBody(String.class)
+                .returnResult()
+                .getResponseBody();
+
+        assertThat(result).isEqualTo("Hello World!");
     }
 }
