@@ -1,4 +1,4 @@
-# KDU 알림이 [![Build Status](https://travis-ci.com/hyojaekim/chatbot.svg?branch=master)](https://travis-ci.com/hyojaekim/chatbot)
+# KDU 알림이 [![Build Status](https://travis-ci.org/hyojaekim/chatbot.svg?branch=master)](https://travis-ci.org/hyojaekim/chatbot)
 학교 생활하면서 필요한 정보를 **카카오톡 플러스 친구**로 이용해서 학식 메뉴, 날씨, 주변 가게 정보 등을 제공해주는 서비스 입니다.
 
 ### 장점
