@@ -8,8 +8,8 @@ plugins {
 	kotlin("plugin.jpa") version "1.3.61"
 }
 
-group = "kdu"
-version = "0.0.2-SANPSHOT"
+group = "kdu-chatbot-service"
+version = "0.0.2"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
