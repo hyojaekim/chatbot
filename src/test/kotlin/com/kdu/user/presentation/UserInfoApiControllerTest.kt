@@ -19,4 +19,14 @@ class UserInfoApiControllerTest(@Autowired val webTestClient: WebTestClient) {
                 .exchange()
                 .expectStatus().isOk
     }
+
+    @Test
+    internal fun `잘못된 캠퍼스 정보로 요청하는 경우 실패한다`() {
+        webTestClient.post()
+                .uri("/api/user/info/campus")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(JsonFactory.createUserInfo("testId", "notExistCampus"))
+                .exchange()
+                .expectStatus().isBadRequest
+    }
 }
