@@ -3,7 +3,6 @@ package com.kdu.common.resolver
 import com.google.gson.JsonElement
 import com.kdu.common.util.KduJsonParser
 import com.kdu.user.domain.Campus
-import com.kdu.user.exception.NotFoundCampusException
 import com.kdu.user.presentation.dto.UserInfoRequestDto
 import org.springframework.core.MethodParameter
 import org.springframework.web.bind.support.WebDataBinderFactory
@@ -29,10 +28,6 @@ class UserInfoArgumentResolver : HandlerMethodArgumentResolver {
 
     private fun findCampus(jsonElement: JsonElement): Campus {
         val campusName: String = KduJsonParser.find(jsonElement, listOf("value", "resolved"))
-        val campus: Campus = Campus.find(campusName)
-        if (campus == Campus.EMPTY) {
-            throw NotFoundCampusException()
-        }
-        return campus
+        return Campus.find(campusName)
     }
 }
