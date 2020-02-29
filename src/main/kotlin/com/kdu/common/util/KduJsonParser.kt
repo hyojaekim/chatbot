@@ -9,9 +9,16 @@ class KduJsonParser private constructor() {
 
     companion object {
         fun toJsonElement(request: HttpServletRequest): JsonElement {
-            val reader = request.reader
+            val reader: BufferedReader = request.reader
             val body: String = reader.use(BufferedReader::readText)
             return JsonParser.parseString(body)
+        }
+
+        fun find(jsonElement: JsonElement, route: List<String>): String {
+            for (location in route) {
+                jsonElement.asJsonObject.get(location)
+            }
+            return jsonElement.toString()
         }
     }
 }

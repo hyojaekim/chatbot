@@ -19,20 +19,17 @@ class UserInfoArgumentResolver : HandlerMethodArgumentResolver {
     }
 
     override fun resolveArgument(parameter: MethodParameter, mavContainer: ModelAndViewContainer?, webRequest: NativeWebRequest, binderFactory: WebDataBinderFactory?): Any? {
-        val request = webRequest.getNativeRequest(HttpServletRequest::class.java)
-        val jsonElement = KduJsonParser.toJsonElement(request!!)
+        val request: HttpServletRequest? = webRequest.getNativeRequest(HttpServletRequest::class.java)
+        val jsonElement: JsonElement = KduJsonParser.toJsonElement(request!!)
 
-        val kakaoId = findKakaoId(jsonElement)
-        val campus = findCampus(jsonElement)
+        val kakaoId: String = KduJsonParser.find(jsonElement, listOf("user", "id"))
+        val campus: Campus = findCampus(jsonElement)
         return UserInfoRequestDto(kakaoId, campus)
     }
 
-    private fun findKakaoId(jsonElement: JsonElement) =
-            jsonElement.asJsonObject.get("user").asJsonObject.get("id").asString
-
     private fun findCampus(jsonElement: JsonElement): Campus {
-        val campusName = jsonElement.asJsonObject.get("value").asJsonObject.get("resolved").asString
-        val campus = Campus.find(campusName)
+        val campusName: String = KduJsonParser.find(jsonElement, listOf("value", "resolved"))
+        val campus: Campus = Campus.find(campusName)
         if (campus == Campus.EMPTY) {
             throw NotFoundCampusException()
         }
