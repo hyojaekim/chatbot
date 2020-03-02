@@ -11,7 +11,7 @@ class KduApplication
 private const val PROPERTIES = (
         "spring.config.location="
                 + "classpath:application.yml,"
-                + "/app/config/springboot-webservice/real-application.yml"
+                + "/app/config/kdu-chatbot-service/real-application.yml"
         )
 
 fun main(args: Array<String>) {
