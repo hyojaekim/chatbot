@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source:  /
-    destination: /home/ubuntu/app/travis/build/
+    destination: /home/ubuntu/app/nonstop/kdu-chatbot-service/
 
 hooks:
   AfterInstall: # 배포가 끝나면 아래 명령어를 실행
