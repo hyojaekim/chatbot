@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: local # 기본 환경 선택
+
+# local 환경
 ---
 
 spring:
@@ -12,3 +14,18 @@ spring:
   h2:
     console:
       enabled: true
+
+# 운영 환경
+---
+spring.profiles: set1
+spring.profiles.include: real-db
+
+server:
+  port: 8081
+
+---
+spring.profiles: set2
+spring.profiles.include: real-db
+
+server:
+  port: 8082
