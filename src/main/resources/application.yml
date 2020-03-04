@@ -4,7 +4,6 @@ spring:
 
 # local 환경
 ---
-
 spring:
   profiles: local
   jpa:
@@ -14,6 +13,11 @@ spring:
   h2:
     console:
       enabled: true
+
+---
+spring:
+  jpa:
+    open-in-view: false
 
 # 운영 환경
 ---
