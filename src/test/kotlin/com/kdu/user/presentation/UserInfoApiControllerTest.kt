@@ -1,6 +1,7 @@
 package com.kdu.user.presentation
 
 import com.kdu.util.JsonFactory
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -12,12 +13,16 @@ class UserInfoApiControllerTest(@Autowired val webTestClient: WebTestClient) {
 
     @Test
     fun `정상적으로 유저의 캠퍼스를 저장한다`() {
-        webTestClient.post()
+        val result = webTestClient.post()
                 .uri("/api/user/info/campus")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(JsonFactory.createUserInfo("testId", "go"))
                 .exchange()
                 .expectStatus().isOk
+                .expectBody(String::class.java)
+                .returnResult().responseBody
+
+        assertThat(result).contains("고성 캠퍼스")
     }
 
     @Test
