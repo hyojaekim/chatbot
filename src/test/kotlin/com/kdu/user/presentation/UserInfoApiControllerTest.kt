@@ -16,7 +16,7 @@ class UserInfoApiControllerTest(@Autowired val webTestClient: WebTestClient) {
         val result = webTestClient.post()
                 .uri("/api/user/info/campus")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(JsonFactory.createUserInfo("testId", "go"))
+                .bodyValue(JsonFactory.createUserInfo("testId", "고성"))
                 .exchange()
                 .expectStatus().isOk
                 .expectBody(String::class.java)
