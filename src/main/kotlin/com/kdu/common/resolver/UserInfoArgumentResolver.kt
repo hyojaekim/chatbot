@@ -21,13 +21,13 @@ class UserInfoArgumentResolver : HandlerMethodArgumentResolver {
         val request: HttpServletRequest? = webRequest.getNativeRequest(HttpServletRequest::class.java)
         val jsonElement: JsonElement = KduJsonParser.toJsonElement(request!!)
 
-        val kakaoId: String = KduJsonParser.find(jsonElement, listOf("user", "id"))
+        val kakaoId: String = KduJsonParser.findUserId(jsonElement)
         val campus: Campus = findCampus(jsonElement)
         return UserInfoRequestDto(kakaoId, campus)
     }
 
     private fun findCampus(jsonElement: JsonElement): Campus {
-        val campusName: String = KduJsonParser.find(jsonElement, listOf("value", "resolved"))
+        val campusName: String = KduJsonParser.findParams(jsonElement, "campus")
         return Campus.find(campusName)
     }
 }

@@ -25,5 +25,13 @@ class KduJsonParser private constructor() {
             }
             return result.toString().replace(QUOTATION_MARKS, EMPTY)
         }
+
+        fun findParams(jsonElement: JsonElement, key: String): String {
+            return find(jsonElement, listOf("action", "params", key))
+        }
+
+        fun findUserId(jsonElement: JsonElement): String {
+            return find(jsonElement, listOf("userRequest", "user", "id"))
+        }
     }
 }
