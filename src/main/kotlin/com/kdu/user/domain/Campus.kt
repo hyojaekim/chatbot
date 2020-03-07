@@ -1,10 +1,10 @@
 package com.kdu.user.domain
 
-enum class Campus(val code: String) {
-    GOSEONG("go"),
-    MUNMAK("mun"),
-    YANGJU("yang"),
-    EMPTY("");
+enum class Campus(val code: String, val realName: String) {
+    GOSEONG("go", "고성"),
+    MUNMAK("mun", "문막"),
+    YANGJU("yang", "양주"),
+    EMPTY("", "");
 
     companion object {
         fun find(code: String): Campus {
