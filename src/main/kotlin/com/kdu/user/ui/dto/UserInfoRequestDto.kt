@@ -1,4 +1,4 @@
-package com.kdu.user.presentation.dto
+package com.kdu.user.ui.dto
 
 import com.kdu.user.domain.Campus
 

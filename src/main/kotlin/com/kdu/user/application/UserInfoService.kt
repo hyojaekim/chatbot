@@ -2,7 +2,7 @@ package com.kdu.user.application
 
 import com.kdu.user.domain.Campus
 import com.kdu.user.exception.NotFoundCampusException
-import com.kdu.user.presentation.dto.UserInfoRequestDto
+import com.kdu.user.ui.dto.UserInfoRequestDto
 import org.springframework.stereotype.Service
 
 @Service

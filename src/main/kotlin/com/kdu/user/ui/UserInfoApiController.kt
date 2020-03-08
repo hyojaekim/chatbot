@@ -1,8 +1,8 @@
-package com.kdu.user.presentation
+package com.kdu.user.ui
 
 import com.kdu.common.message.ResponseMessage
 import com.kdu.user.application.UserInfoService
-import com.kdu.user.presentation.dto.UserInfoRequestDto
+import com.kdu.user.ui.dto.UserInfoRequestDto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController

@@ -3,7 +3,7 @@ package com.kdu.user.application
 import com.kdu.user.domain.Campus
 import com.kdu.user.domain.User
 import com.kdu.user.domain.UserRepository
-import com.kdu.user.presentation.dto.UserInfoRequestDto
+import com.kdu.user.ui.dto.UserInfoRequestDto
 import com.nhaarman.mockitokotlin2.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

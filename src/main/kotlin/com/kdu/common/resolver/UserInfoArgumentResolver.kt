@@ -3,7 +3,7 @@ package com.kdu.common.resolver
 import com.google.gson.JsonElement
 import com.kdu.common.util.KduJsonParser
 import com.kdu.user.domain.Campus
-import com.kdu.user.presentation.dto.UserInfoRequestDto
+import com.kdu.user.ui.dto.UserInfoRequestDto
 import org.springframework.core.MethodParameter
 import org.springframework.web.bind.support.WebDataBinderFactory
 import org.springframework.web.context.request.NativeWebRequest

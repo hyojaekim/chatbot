@@ -2,7 +2,7 @@ package com.kdu.user.application
 
 import com.kdu.user.domain.Campus
 import com.kdu.user.exception.NotFoundCampusException
-import com.kdu.user.presentation.dto.UserInfoRequestDto
+import com.kdu.user.ui.dto.UserInfoRequestDto
 import com.nhaarman.mockitokotlin2.*
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
