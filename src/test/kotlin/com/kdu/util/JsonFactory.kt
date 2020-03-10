@@ -5,5 +5,9 @@ class JsonFactory private constructor() {
         fun createUserInfo(id: String, campusName: String): String {
             return "{\"action\":{\"params\":{\"campus\":\"${campusName}\"}},\"userRequest\":{\"user\":{\"id\":\"${id}\"}}}"
         }
+
+        fun createMaskInfo(year: String): String {
+            return "{\"action\":{\"params\":{\"year\":\"${year}\"}}}"
+        }
     }
 }
