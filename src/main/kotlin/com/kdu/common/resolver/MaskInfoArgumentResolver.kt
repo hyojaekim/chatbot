@@ -26,7 +26,7 @@ class MaskInfoArgumentResolver : HandlerMethodArgumentResolver {
     }
 
     fun findYear(jsonElement: JsonElement): Year {
-        val year = KduJsonParser.findParams(jsonElement, "year")
+        val year = KduJsonParser.find(jsonElement, listOf("userRequest", "utterance"))
         val convertYear = Integer.valueOf(year)
         return Year.of(convertYear)
     }
