@@ -7,7 +7,7 @@ class JsonFactory private constructor() {
         }
 
         fun createMaskInfo(year: String): String {
-            return "{\"action\":{\"params\":{\"year\":\"${year}\"}}}"
+            return "{\"userRequest\":{\"utterance\":\"${year}\"}}"
         }
     }
 }
