@@ -18,6 +18,7 @@ class MaskController(val maskService: MaskService) {
 
         return ResponseEntity.ok(ResponseMessage.Builder()
                 .simpleText(maskInfoMessage)
+                .build()
                 .toString())
     }
 }
