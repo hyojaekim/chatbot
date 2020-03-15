@@ -1,4 +1,4 @@
-# KDU 알림이 [![Build Status](https://travis-ci.com/hyojaekim/chatbot.svg?branch=master)
+# KDU 알림이 ![Build Status](https://travis-ci.com/hyojaekim/chatbot.svg?branch=master)
 
 학교 생활하면서 필요한 정보를 **카카오톡 플러스 친구**로 이용해서 학식 메뉴, 날씨, 주변 가게 정보 등을 제공해주는 서비스 입니다.
 
@@ -14,6 +14,7 @@
 
 ### 기술 스택
 
+```
 Language : Kotlin
 
 Backend : Spring Boot 2.x, JPA
@@ -29,6 +30,13 @@ Source version control : GIT
 Repository : GitHub
 
 Issue Tracker : GitHub Issues, GitHub Kanban Board
+```
+
+![사용자 요청](src/main/resources/static/gif/request.gif)
+
+![배포](src/main/resources/static/gif/code.gif)
+
+![무중단 배포](src/main/resources/static/gif/last_request.gif)
 
 ### 기능
 | 분류 | 기능 |
@@ -44,6 +52,7 @@ Issue Tracker : GitHub Issues, GitHub Kanban Board
 | :---: | :---: |
 | 코로나 정보 | 확진자 현황 및 동선 (해당 서비스로 이동) |
 | | 해당 장소 방역 여부 (해당 서비스로 이동) |
+| | 마스크 재고 (해당 서비스로 이동) |
 | | 마스크 5부제 (구매 가능한 날짜) |
 | | 예방 수칙 |
 | | 의심증상 |
