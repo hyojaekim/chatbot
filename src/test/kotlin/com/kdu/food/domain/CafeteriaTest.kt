@@ -20,6 +20,6 @@ internal class CafeteriaTest {
 
     @Test
     internal fun `정상적으로 이름을 가져온다`() {
-        Assertions.assertThat(Cafeteria.GOSEONG.toString()).isEqualTo("고성 캠퍼스 식당")
+        Assertions.assertThat(Cafeteria.GOSEONG.toString()).contains("고성").contains("캠퍼스 식당")
     }
 }

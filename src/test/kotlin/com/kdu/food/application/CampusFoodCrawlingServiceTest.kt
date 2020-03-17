@@ -25,11 +25,6 @@ internal class CampusFoodCrawlingServiceTest {
         if (result.size != 0) {
             assertThat(result[0].get().size).isEqualTo(7)
         }
-        for (campusFoods in result) {
-            for (campusFood in campusFoods.get()) {
-                println(campusFood.toString())
-            }
-        }
     }
 
     @Test
