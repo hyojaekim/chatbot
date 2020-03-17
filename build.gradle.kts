@@ -27,6 +27,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("com.google.code.gson:gson:2.8.6")
 	implementation("org.mariadb.jdbc:mariadb-java-client")
+	implementation("org.jsoup:jsoup:1.13.1")
 
 	runtimeOnly("com.h2database:h2")
 
