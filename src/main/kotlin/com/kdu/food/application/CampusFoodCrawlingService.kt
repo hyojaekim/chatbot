@@ -43,7 +43,7 @@ class CampusFoodCrawlingService {
             val foodContentElements = foodContents[i].getElementsByTag("td")
 
             val type: String = typeElement.html().replace("<br>", "")
-            result.add(convertFoodTypes(cafeteria, date, type, foodContentElements))
+            result.add(getCampusFoods(cafeteria, date, type, foodContentElements))
         }
         return result
     }
@@ -61,15 +61,11 @@ class CampusFoodCrawlingService {
         return result
     }
 
-    private fun convertFoodTypes(cafeteria: Cafeteria, date: ArrayList<String>, type: String, foodContents: Elements): CampusFoods {
+    private fun getCampusFoods(cafeteria: Cafeteria, date: ArrayList<String>, type: String, foodContents: Elements): CampusFoods {
         validateFoodContents(foodContents)
         val result = arrayListOf<CampusFood>()
         for (i in 0 until foodContents.size) {
-            val splitDate = date[i].split(DELIMITER)
-            val convertDate = splitDate[FIRST]
-            val dayOfWeek = splitDate[SECOND]
-            val content = findFoodContent(foodContents[i])
-            val campusFood = CampusFood.of(cafeteria, dayOfWeek, convertDate, type, content)
+            val campusFood = createCampusFood(date[i], foodContents[i], cafeteria, type)
             result.add(campusFood)
         }
         return CampusFoods(result)
@@ -81,7 +77,15 @@ class CampusFoodCrawlingService {
         }
     }
 
-    private fun findFoodContent(food: Element): String {
+    private fun createCampusFood(date: String, foodContents: Element, cafeteria: Cafeteria, type: String): CampusFood {
+        val splitDate = date.split(DELIMITER)
+        val convertDate = splitDate[FIRST]
+        val dayOfWeek = splitDate[SECOND]
+        val content = getFoodContent(foodContents)
+        return CampusFood.of(cafeteria, dayOfWeek, convertDate, type, content)
+    }
+
+    private fun getFoodContent(food: Element): String {
         if (food.getElementsByTag("span").size != EMPTY) {
             return food.getElementsByTag("span")[FIRST].html()
         }

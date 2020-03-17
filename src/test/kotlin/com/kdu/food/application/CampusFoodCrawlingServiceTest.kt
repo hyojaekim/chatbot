@@ -23,10 +23,10 @@ internal class CampusFoodCrawlingServiceTest {
 
         assertThat(result).isNotNull
         if (result.size != 0) {
-            assertThat(result[0].campusFoods.size).isEqualTo(7)
+            assertThat(result[0].get().size).isEqualTo(7)
         }
         for (campusFoods in result) {
-            for (campusFood in campusFoods.campusFoods) {
+            for (campusFood in campusFoods.get()) {
                 println(campusFood.toString())
             }
         }
