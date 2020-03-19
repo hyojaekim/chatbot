@@ -5,17 +5,12 @@ import com.kdu.food.domain.CampusFoods
 import com.kdu.food.exception.CampusFoodCrawlingFailException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 
-internal class CampusFoodCrawlingServiceTest {
-
-    lateinit var crawlingService: CampusFoodCrawlingService
-
-    @BeforeEach
-    internal fun setUp() {
-        crawlingService = CampusFoodCrawlingService()
-    }
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+internal class CampusFoodCrawlingServiceTest(@Autowired val crawlingService: CampusFoodCrawlingService) {
 
     @Test
     internal fun `정상적으로 1주일 학식 메뉴를 크롤링한다`() {
