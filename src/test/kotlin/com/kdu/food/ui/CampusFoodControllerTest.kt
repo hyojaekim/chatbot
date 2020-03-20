@@ -1,5 +1,6 @@
 package com.kdu.food.ui
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -24,5 +25,18 @@ internal class CampusFoodControllerTest(@Autowired val webTestClient: WebTestCli
                 .uri("/api/food/campus?code=$code")
                 .exchange()
                 .expectStatus().isBadRequest
+    }
+
+    @Test
+    internal fun `정상적으로 학식 메뉴를 가져온다`() {
+        val code = "C04"
+        val result = webTestClient.get()
+                .uri("/api/food/campus?code=$code")
+                .exchange()
+                .expectStatus().isOk
+                .expectBody(String::class.java)
+                .returnResult().responseBody
+
+        assertThat(result).contains("테스트 메뉴")
     }
 }
