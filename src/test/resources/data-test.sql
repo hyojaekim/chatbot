@@ -1,0 +1,1 @@
+INSERT INTO campus_food(id, cafeteria, day_of_week, date, type, content) VALUES (1, 0, '월', '2020-03-21', '한정식', '테스트 메뉴');

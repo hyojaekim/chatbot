@@ -14,5 +14,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
   datasource:
+    data: classpath:data-test.sql # 시작할때 실행시킬 script
     hikari:
       jdbc-url: jdbc:h2:mem://localhost/~/testdb;MODE=MYSQL
