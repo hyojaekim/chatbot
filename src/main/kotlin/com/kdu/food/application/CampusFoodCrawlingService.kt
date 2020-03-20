@@ -94,7 +94,7 @@ class CampusFoodCrawlingService {
 
     companion object {
         private const val FIRST = 0
-        private const val SECOND = 0
+        private const val SECOND = 1
         private const val EMPTY = 0
         private const val SEVEN = 7
         private const val DELIMITER = "/"
