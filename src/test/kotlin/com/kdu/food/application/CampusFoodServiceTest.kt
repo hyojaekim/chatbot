@@ -2,7 +2,7 @@ package com.kdu.food.application
 
 import com.kdu.food.application.dto.CampusFoodRequestDto
 import com.kdu.food.domain.CampusFood
-import com.kdu.food.exception.CampusFoodCrawlingFailException
+import com.kdu.food.exception.NotFoundCafeteriaException
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -27,7 +27,7 @@ internal class CampusFoodServiceTest {
 
     @Test
     internal fun `잘못된 코드로 요청하면 예외가 발생한다`() {
-        assertThrows(CampusFoodCrawlingFailException::class.java) {
+        assertThrows(NotFoundCafeteriaException::class.java) {
             campusFoodService.saveFoods("C2")
 
             verify(campusFoodInternalService, times(0)).saveFoods(any())
@@ -45,7 +45,7 @@ internal class CampusFoodServiceTest {
     internal fun `캠퍼스 코드가 비정상적이면 예외가 발생한다`() {
         val requestDto = CampusFoodRequestDto("~~", LocalDate.now())
 
-        assertThrows<CampusFoodCrawlingFailException> { campusFoodService.find(requestDto) }
+        assertThrows<NotFoundCafeteriaException> { campusFoodService.find(requestDto) }
     }
 
     @Test

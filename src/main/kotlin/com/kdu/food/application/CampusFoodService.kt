@@ -3,7 +3,7 @@ package com.kdu.food.application
 import com.kdu.food.application.dto.CampusFoodRequestDto
 import com.kdu.food.domain.Cafeteria
 import com.kdu.food.domain.CampusFood
-import com.kdu.food.exception.CampusFoodCrawlingFailException
+import com.kdu.food.exception.NotFoundCafeteriaException
 import org.springframework.stereotype.Service
 
 @Service
@@ -17,7 +17,7 @@ class CampusFoodService(private val campusFoodInternalService: CampusFoodInterna
     private fun getCafeteria(code: String): Cafeteria {
         val cafeteria = Cafeteria.findByCode(code)
         if (cafeteria == Cafeteria.EMPTY) {
-            throw CampusFoodCrawlingFailException()
+            throw NotFoundCafeteriaException()
         }
         return cafeteria
     }
