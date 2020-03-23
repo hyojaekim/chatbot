@@ -1,5 +1,6 @@
 package com.kdu.common.configuration
 
+import com.kdu.common.resolver.KakaoInfoArgumentResolver
 import com.kdu.common.resolver.MaskInfoArgumentResolver
 import com.kdu.common.resolver.UserInfoArgumentResolver
 import org.springframework.context.annotation.Configuration
@@ -12,5 +13,6 @@ class WebMvcConfig : WebMvcConfigurer {
     override fun addArgumentResolvers(resolvers: MutableList<HandlerMethodArgumentResolver>) {
         resolvers.add(UserInfoArgumentResolver())
         resolvers.add(MaskInfoArgumentResolver())
+        resolvers.add(KakaoInfoArgumentResolver())
     }
 }

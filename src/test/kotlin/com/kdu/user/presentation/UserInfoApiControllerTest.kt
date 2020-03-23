@@ -34,4 +34,18 @@ class UserInfoApiControllerTest(@Autowired val webTestClient: WebTestClient) {
                 .exchange()
                 .expectStatus().isBadRequest
     }
+
+    @Test
+    internal fun `정상적으로 학교 식당 버튼들을 보여준다`() {
+        val result = webTestClient.post()
+                .uri("/api/cafeteria")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(JsonFactory.createKakaoId("testId"))
+                .exchange()
+                .expectStatus().isOk
+                .expectBody(String::class.java)
+                .returnResult().responseBody
+
+        assertThat(result).contains("고성")
+    }
 }

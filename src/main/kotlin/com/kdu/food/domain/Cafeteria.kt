@@ -1,5 +1,7 @@
 package com.kdu.food.domain
 
+import com.kdu.user.domain.Campus
+
 enum class Cafeteria(private val location: String, private val realName: String, val code: String) {
     YANGJU("양주", "캠퍼스 식당", "C04"),
     YANGJU_HAPPY_SHARE("양주", "행복공공기숙사 식당", "C07"),
@@ -23,6 +25,17 @@ enum class Cafeteria(private val location: String, private val realName: String,
                 }
             }
             return EMPTY
+        }
+
+        fun findByCampus(campus: Campus): ArrayList<String> {
+            val campusName = campus.realName
+            val result = arrayListOf<String>()
+            for (cafeteria in values()) {
+                if (cafeteria.location == campusName) {
+                    result.add(cafeteria.toString())
+                }
+            }
+            return result
         }
     }
 }

@@ -9,17 +9,27 @@ class ResponseMessage private constructor() {
         private var version: String,
         private var template: JsonObject
     ) {
-        constructor() : this("2.0", JsonObject()) {
-            template.add(OUTPUTS, JsonArray())
-        }
+        constructor() : this("2.0", JsonObject())
 
         fun simpleText(text: String) = apply {
+            template.add(OUTPUTS, JsonArray())
             val simpleText = JsonObject()
             val textJson = JsonObject()
             textJson.addProperty(TEXT, text)
             simpleText.add(SIMPLE_TEXT, textJson)
 
             template.get(OUTPUTS).asJsonArray.add(simpleText)
+        }
+
+        fun quickReplies(cafeteriaNames: ArrayList<String>) = apply {
+            template.add("quickReplies", JsonArray())
+            for (cafeteriaName in cafeteriaNames) {
+                val quickReply = JsonObject()
+                quickReply.addProperty("type", "text")
+                quickReply.addProperty("label", cafeteriaName)
+                quickReply.addProperty("message", cafeteriaName)
+                template.get("quickReplies").asJsonArray.add(quickReply)
+            }
         }
 
         fun build(): JsonObject {

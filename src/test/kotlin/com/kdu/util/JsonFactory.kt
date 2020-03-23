@@ -9,5 +9,9 @@ class JsonFactory private constructor() {
         fun createMaskInfo(year: String): String {
             return "{\"userRequest\":{\"utterance\":\"${year}\"}}"
         }
+
+        fun createKakaoId(id: String): String {
+            return "{\"userRequest\":{\"user\":{\"id\":\"${id}\"}}}"
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.kdu.user.presentation
 
 import com.kdu.common.message.ResponseMessage
 import com.kdu.user.application.UserInfoService
+import com.kdu.user.presentation.dto.KakaoInfoRequestDto
 import com.kdu.user.presentation.dto.UserInfoRequestDto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -19,5 +20,14 @@ class UserInfoApiController(val userInfoService: UserInfoService) {
                 .simpleText("$campusName 캠퍼스로 정상적으로 저장되었습니다.")
                 .build()
         return ResponseEntity.ok(responseMessage.toString())
+    }
+
+    @PostMapping("/api/cafeteria")
+    fun selectCafeteria(kakaoInfoRequestDto: KakaoInfoRequestDto): ResponseEntity<String> {
+        val cafeteriaNames = userInfoService.cafeteriaButton(kakaoInfoRequestDto)
+        return ResponseEntity.ok(ResponseMessage.Builder()
+                .quickReplies(cafeteriaNames)
+                .build()
+                .toString())
     }
 }

@@ -1,9 +1,12 @@
 package com.kdu.user.application
 
 import com.kdu.user.domain.Campus
+import com.kdu.user.domain.User
 import com.kdu.user.exception.NotFoundCampusException
+import com.kdu.user.presentation.dto.KakaoInfoRequestDto
 import com.kdu.user.presentation.dto.UserInfoRequestDto
 import com.nhaarman.mockitokotlin2.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -35,5 +38,19 @@ class UserInfoServiceTest {
             userInfoService.register(UserInfoRequestDto("id", Campus.EMPTY))
         }
         verify(userInternalService, times(0)).save(any())
+    }
+
+    @Test
+    internal fun `정상적으로 학교 식당 이름을 가져온다`() {
+        val user = User("test", Campus.YANGJU)
+
+        whenever(userInternalService.findByKakaoId(any())).thenReturn(user)
+
+        val result = userInfoService.cafeteriaButton(KakaoInfoRequestDto("test"))
+
+        assertThat(result).hasSize(2)
+        for (cafeteria in result) {
+            assertThat(cafeteria).contains("양주")
+        }
     }
 }

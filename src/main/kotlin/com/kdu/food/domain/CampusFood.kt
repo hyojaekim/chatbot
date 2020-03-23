@@ -8,7 +8,7 @@ data class CampusFood(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long?,
-        @Enumerated
+        @Enumerated(EnumType.STRING)
         var cafeteria: Cafeteria,
         @Column(name = "day_of_week")
         var dayOfWeek: String,
