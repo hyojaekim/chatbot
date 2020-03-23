@@ -9,6 +9,7 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class CampusFoodCrawlingService {
@@ -79,8 +80,8 @@ class CampusFoodCrawlingService {
 
     private fun createCampusFood(date: String, foodContents: Element, cafeteria: Cafeteria, type: String): CampusFood {
         val splitDate = date.split(DELIMITER)
-        val convertDate = splitDate[FIRST]
-        val dayOfWeek = splitDate[SECOND]
+        val dayOfWeek = splitDate[FIRST]
+        val convertDate = LocalDate.parse(splitDate[SECOND])
         val content = getFoodContent(foodContents)
         return CampusFood.of(cafeteria, dayOfWeek, convertDate, type, content)
     }

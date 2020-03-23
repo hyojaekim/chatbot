@@ -9,8 +9,8 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
@@ -33,7 +33,7 @@ internal class CampusFoodInternalServiceTest {
 
     @Test
     internal fun `정상적으로 크롤링 후에 저장한다`() {
-        val campusFood = CampusFood.of(Cafeteria.YANGJU, "월", "2020-01-02", "type", "content")
+        val campusFood = CampusFood.of(Cafeteria.YANGJU, "월", LocalDate.of(2020, 1, 2), "type", "content")
         val campusFoods = CampusFoods(arrayListOf(campusFood))
         val allCampusFoods = arrayListOf(campusFoods)
 

@@ -1,5 +1,6 @@
 package com.kdu.food.domain
 
+import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
@@ -9,12 +10,16 @@ data class CampusFood(
         var id: Long?,
         @Enumerated
         var cafeteria: Cafeteria,
+        @Column(name = "day_of_week")
         var dayOfWeek: String,
-        var date: String,
+        @Column(name = "start_date")
+        var date: LocalDate?,
+        @Column(name = "food_type")
         var type: String,
+        @Column(name = "food_menu")
         var content: String
 ) {
-    constructor() : this(null, Cafeteria.EMPTY, "", "", "", "")
+    constructor() : this(null, Cafeteria.EMPTY, "", null, "", "")
 
     override fun toString(): String {
         return StringBuffer()
@@ -31,7 +36,7 @@ data class CampusFood(
     companion object {
         private const val ENTER = "<br>"
 
-        fun of(cafeteria: Cafeteria, dayOfWeek: String, date: String, type: String, content: String): CampusFood {
+        fun of(cafeteria: Cafeteria, dayOfWeek: String, date: LocalDate, type: String, content: String): CampusFood {
             val campusFood = CampusFood()
             campusFood.cafeteria = cafeteria
             campusFood.dayOfWeek = dayOfWeek

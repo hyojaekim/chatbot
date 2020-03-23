@@ -31,7 +31,7 @@ class CampusFoodInternalService(
 
     @Transactional(readOnly = true)
     fun findByCafeteriaAndDate(cafeteria: Cafeteria, date: LocalDate): CampusFood {
-        return campusFoodRepository.findByCafeteriaAndDate(cafeteria, date.toString())
+        return campusFoodRepository.findByCafeteriaAndDate(cafeteria, date)
                 .orElseThrow { NotFoundCampusFoodException() }
     }
 }
