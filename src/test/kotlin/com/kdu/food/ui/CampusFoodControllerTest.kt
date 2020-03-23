@@ -30,8 +30,8 @@ internal class CampusFoodControllerTest(@Autowired val webTestClient: WebTestCli
     @Test
     internal fun `정상적으로 학식 메뉴를 가져온다`() {
         val code = "C04"
-        val result = webTestClient.get()
-                .uri("/api/food/campus?code=$code")
+        val result = webTestClient.post()
+                .uri("/api/food/campus/search?code=$code")
                 .exchange()
                 .expectStatus().isOk
                 .expectBody(String::class.java)
