@@ -21,14 +21,14 @@ class ResponseMessage private constructor() {
             template.get(OUTPUTS).asJsonArray.add(simpleText)
         }
 
-        fun quickReplies(cafeteriaNames: ArrayList<String>) = apply {
-            template.add("quickReplies", JsonArray())
+        fun quickReplies(cafeteriaNames: ArrayList<String>, subfix: String) = apply {
+            template.add(QUICK_REPLIES, JsonArray())
             for (cafeteriaName in cafeteriaNames) {
                 val quickReply = JsonObject()
-                quickReply.addProperty("type", "text")
-                quickReply.addProperty("label", cafeteriaName)
-                quickReply.addProperty("message", cafeteriaName)
-                template.get("quickReplies").asJsonArray.add(quickReply)
+                quickReply.addProperty(LABEL, cafeteriaName)
+                quickReply.addProperty(ACTION, MESSAGE)
+                quickReply.addProperty(MESSAGE_TEXT, cafeteriaName + subfix)
+                template.get(QUICK_REPLIES).asJsonArray.add(quickReply)
             }
         }
 
@@ -45,6 +45,11 @@ class ResponseMessage private constructor() {
             private const val OUTPUTS = "outputs"
             private const val TEXT = "text"
             private const val SIMPLE_TEXT = "simpleText"
+            private const val MESSAGE = "message"
+            private const val LABEL = "label"
+            private const val ACTION = "action"
+            private const val MESSAGE_TEXT = "messageText"
+            private const val QUICK_REPLIES = "quickReplies"
         }
     }
 }

@@ -26,7 +26,8 @@ class UserInfoApiController(val userInfoService: UserInfoService) {
     fun selectCafeteria(kakaoInfoRequestDto: KakaoInfoRequestDto): ResponseEntity<String> {
         val cafeteriaNames = userInfoService.cafeteriaButton(kakaoInfoRequestDto)
         return ResponseEntity.ok(ResponseMessage.Builder()
-                .quickReplies(cafeteriaNames)
+                .simpleText("어떤 식당의 메뉴가 궁금하신가요?")
+                .quickReplies(cafeteriaNames, "의 메뉴가 궁금해요.")
                 .build()
                 .toString())
     }
