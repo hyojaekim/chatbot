@@ -1,9 +1,11 @@
 package com.kdu.food.ui
 
+import com.kdu.util.JsonFactory
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -29,14 +31,29 @@ internal class CampusFoodControllerTest(@Autowired val webTestClient: WebTestCli
 
     @Test
     internal fun `정상적으로 학식 메뉴를 가져온다`() {
-        val code = "C04"
         val result = webTestClient.post()
-                .uri("/api/food/campus/search?code=$code")
+                .uri("/api/food/campus/search")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(JsonFactory.createParams("campusCode", "C04"))
                 .exchange()
                 .expectStatus().isOk
                 .expectBody(String::class.java)
                 .returnResult().responseBody
 
         assertThat(result).contains("테스트 메뉴")
+    }
+
+    @Test
+    internal fun `학식 메뉴가 없으면 정해지지 않았다고 메세지를 보낸다`() {
+        val result = webTestClient.post()
+                .uri("/api/food/campus/search")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(JsonFactory.createParams("campusCode", "C01"))
+                .exchange()
+                .expectStatus().isOk
+                .expectBody(String::class.java)
+                .returnResult().responseBody
+
+        assertThat(result).contains("현재 메뉴가 정해지지 않았습니다.")
     }
 }

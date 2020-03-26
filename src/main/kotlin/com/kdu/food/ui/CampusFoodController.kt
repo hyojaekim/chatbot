@@ -8,16 +8,14 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDate
 
 @RestController
 @RequestMapping("/api/food/campus")
 class CampusFoodController(private val campusFoodService: CampusFoodService) {
 
     @PostMapping("/search")
-    fun find(@RequestParam code: String): ResponseEntity<String> {
-        val campusFoodRequestDate = CampusFoodRequestDto(code, LocalDate.now())
-        val message = campusFoodService.find(campusFoodRequestDate)
+    fun find(campusFoodRequestDto: CampusFoodRequestDto): ResponseEntity<String> {
+        val message = campusFoodService.find(campusFoodRequestDto)
         return ResponseEntity.ok(ResponseMessage.Builder()
                 .simpleText(message)
                 .build()
