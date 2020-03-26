@@ -82,12 +82,12 @@ class CampusFoodCrawlingService {
         val splitDate = date.split(DELIMITER)
         val dayOfWeek = splitDate[FIRST]
         val convertDate = LocalDate.parse(splitDate[SECOND])
-        val content = getFoodContent(foodContents).replace("<br> ", NEW_LINE)
+        val content = getFoodContent(foodContents).replace("<br>", NEW_LINE).replace(SPACE, EMPTY).replace("amp;", EMPTY)
         return CampusFood.of(cafeteria, dayOfWeek, convertDate, type, content)
     }
 
     private fun getFoodContent(food: Element): String {
-        if (food.getElementsByTag("span").size != EMPTY) {
+        if (food.getElementsByTag("span").size != EMPTY_SIZE) {
             return food.getElementsByTag("span")[FIRST].html()
         }
         return food.html()
@@ -96,9 +96,11 @@ class CampusFoodCrawlingService {
     companion object {
         private const val FIRST = 0
         private const val SECOND = 1
-        private const val EMPTY = 0
+        private const val EMPTY_SIZE = 0
         private const val SEVEN = 7
         private const val DELIMITER = "/"
         private const val NEW_LINE = "\n"
+        private const val EMPTY = ""
+        private const val SPACE = " "
     }
 }
