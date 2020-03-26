@@ -1,5 +1,6 @@
 package com.kdu.common.configuration
 
+import com.kdu.common.resolver.CampusFoodArgumentResolver
 import com.kdu.common.resolver.KakaoInfoArgumentResolver
 import com.kdu.common.resolver.MaskInfoArgumentResolver
 import com.kdu.common.resolver.UserInfoArgumentResolver
@@ -14,5 +15,6 @@ class WebMvcConfig : WebMvcConfigurer {
         resolvers.add(UserInfoArgumentResolver())
         resolvers.add(MaskInfoArgumentResolver())
         resolvers.add(KakaoInfoArgumentResolver())
+        resolvers.add(CampusFoodArgumentResolver())
     }
 }
