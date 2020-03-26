@@ -27,6 +27,7 @@ data class CampusFood(
                 .append(NEW_LINE)
                 .append("$date ($dayOfWeek)")
                 .append(NEW_LINE)
+                .append(NEW_LINE)
                 .append("<$type>")
                 .append(NEW_LINE)
                 .append(content)

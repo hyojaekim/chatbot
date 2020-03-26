@@ -82,7 +82,7 @@ class CampusFoodCrawlingService {
         val splitDate = date.split(DELIMITER)
         val dayOfWeek = splitDate[FIRST]
         val convertDate = LocalDate.parse(splitDate[SECOND])
-        val content = getFoodContent(foodContents)
+        val content = getFoodContent(foodContents).replace("<br> ", NEW_LINE)
         return CampusFood.of(cafeteria, dayOfWeek, convertDate, type, content)
     }
 
@@ -99,5 +99,6 @@ class CampusFoodCrawlingService {
         private const val EMPTY = 0
         private const val SEVEN = 7
         private const val DELIMITER = "/"
+        private const val NEW_LINE = "\n"
     }
 }
