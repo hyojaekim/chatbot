@@ -24,17 +24,17 @@ data class CampusFood(
     override fun toString(): String {
         return StringBuffer()
                 .append(cafeteria.toString())
-                .append(ENTER)
+                .append(NEW_LINE)
                 .append("$date ($dayOfWeek)")
-                .append(ENTER)
+                .append(NEW_LINE)
                 .append("<$type>")
-                .append(ENTER)
+                .append(NEW_LINE)
                 .append(content)
                 .toString()
     }
 
     companion object {
-        private const val ENTER = "<br>"
+        private const val NEW_LINE = "\n"
 
         fun of(cafeteria: Cafeteria, dayOfWeek: String, date: LocalDate, type: String, content: String): CampusFood {
             val campusFood = CampusFood()
