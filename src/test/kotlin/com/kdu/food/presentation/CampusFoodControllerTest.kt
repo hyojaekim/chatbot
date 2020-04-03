@@ -1,4 +1,4 @@
-package com.kdu.food.ui
+package com.kdu.food.presentation
 
 import com.kdu.util.JsonFactory
 import org.assertj.core.api.Assertions.assertThat

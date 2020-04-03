@@ -1,6 +1,6 @@
 package com.kdu.life.application
 
-import com.kdu.life.ui.dto.MaskPurchaseInfoRequestDto
+import com.kdu.life.presentation.dto.MaskPurchaseInfoRequestDto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.Year

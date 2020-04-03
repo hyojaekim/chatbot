@@ -1,8 +1,8 @@
-package com.kdu.life.ui
+package com.kdu.life.presentation
 
 import com.kdu.common.message.ResponseMessage
 import com.kdu.life.application.MaskService
-import com.kdu.life.ui.dto.MaskPurchaseInfoRequestDto
+import com.kdu.life.presentation.dto.MaskPurchaseInfoRequestDto
 import com.kdu.life.util.MaskInfoMessageConverter
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

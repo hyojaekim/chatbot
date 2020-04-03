@@ -2,7 +2,7 @@ package com.kdu.common.resolver
 
 import com.google.gson.JsonElement
 import com.kdu.common.util.KduJsonParser
-import com.kdu.life.ui.dto.MaskPurchaseInfoRequestDto
+import com.kdu.life.presentation.dto.MaskPurchaseInfoRequestDto
 import org.springframework.core.MethodParameter
 import org.springframework.web.bind.support.WebDataBinderFactory
 import org.springframework.web.context.request.NativeWebRequest

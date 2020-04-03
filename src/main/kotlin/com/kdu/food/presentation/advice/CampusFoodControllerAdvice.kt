@@ -1,4 +1,4 @@
-package com.kdu.food.ui.advice
+package com.kdu.food.presentation.advice
 
 import com.kdu.common.message.ResponseMessage
 import com.kdu.food.exception.CampusFoodCrawlingFailException

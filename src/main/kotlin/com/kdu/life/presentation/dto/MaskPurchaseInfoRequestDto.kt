@@ -1,4 +1,4 @@
-package com.kdu.life.ui.dto
+package com.kdu.life.presentation.dto
 
 import java.time.Year
 

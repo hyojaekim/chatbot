@@ -1,7 +1,7 @@
 package com.kdu.life.application
 
 import com.kdu.life.domain.MaskPurchaseDay
-import com.kdu.life.ui.dto.MaskPurchaseInfoRequestDto
+import com.kdu.life.presentation.dto.MaskPurchaseInfoRequestDto
 import org.springframework.stereotype.Service
 
 @Service

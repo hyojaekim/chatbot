@@ -1,4 +1,4 @@
-package com.kdu.food.ui
+package com.kdu.food.presentation
 
 import com.kdu.common.message.ResponseMessage
 import com.kdu.food.application.CampusFoodService
