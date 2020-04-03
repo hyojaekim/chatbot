@@ -32,6 +32,24 @@ class ResponseMessage private constructor() {
             }
         }
 
+        fun basicCards(basicCards: List<BasicCard>) = apply {
+            template.add(OUTPUTS, JsonArray())
+            val carousel = JsonObject()
+            val items = JsonArray()
+            for (basicCard in basicCards) {
+                val item = JsonObject()
+                item.addProperty(TITLE, basicCard.title)
+                item.addProperty(DESCRIPTION, basicCard.description)
+                items.add(item)
+            }
+            carousel.addProperty(TYPE, BASIC_CARD)
+            carousel.add(ITEMS, items)
+
+            val result = JsonObject()
+            result.add(CAROUSEL, carousel)
+            template.get(OUTPUTS).asJsonArray.add(result)
+        }
+
         fun build(): JsonObject {
             val result = JsonObject()
             result.addProperty(VERSION, version)
@@ -40,16 +58,22 @@ class ResponseMessage private constructor() {
         }
 
         companion object {
-            private const val VERSION = "version"
-            private const val TEMPLATE = "template"
-            private const val OUTPUTS = "outputs"
-            private const val TEXT = "text"
-            private const val SIMPLE_TEXT = "simpleText"
-            private const val MESSAGE = "message"
-            private const val LABEL = "label"
             private const val ACTION = "action"
+            private const val BASIC_CARD = "basicCard"
+            private const val CAROUSEL = "carousel"
+            private const val DESCRIPTION = "description"
+            private const val ITEMS = "items"
+            private const val LABEL = "label"
+            private const val MESSAGE = "message"
             private const val MESSAGE_TEXT = "messageText"
+            private const val OUTPUTS = "outputs"
             private const val QUICK_REPLIES = "quickReplies"
+            private const val SIMPLE_TEXT = "simpleText"
+            private const val TEMPLATE = "template"
+            private const val TEXT = "text"
+            private const val TITLE = "title"
+            private const val TYPE = "type"
+            private const val VERSION = "version"
         }
     }
 }
