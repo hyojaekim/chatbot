@@ -20,7 +20,5 @@ internal class SubwayControllerTest(@Autowired val webTestClient: WebTestClient)
                 .expectStatus().isOk
                 .expectBody(String::class.java)
                 .returnResult().responseBody
-
-        println(responseBody)
     }
 }
