@@ -1,6 +1,6 @@
 package com.kdu.life.util
 
-class MaskInfoMessageConverter {
+class MaskInfoMessageConverter private constructor() {
 
     companion object {
         fun maskPurchaseRequestMessage(day: String): String {

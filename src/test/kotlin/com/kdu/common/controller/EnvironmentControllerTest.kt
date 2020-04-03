@@ -15,4 +15,11 @@ class EnvironmentControllerTest(@Autowired val testRestTemplate: TestRestTemplat
 
         assertThat(result).isEqualTo("local")
     }
+
+    @Test
+    internal fun `정상적으로 Hello World 메세지를 생성한다`() {
+        val result = testRestTemplate.postForObject("/api/hello", null, String::class.java)
+
+        assertThat(result).contains("Hello World")
+    }
 }
