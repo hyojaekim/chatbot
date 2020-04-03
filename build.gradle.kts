@@ -28,6 +28,8 @@ dependencies {
 	implementation("com.google.code.gson:gson:2.8.6")
 	implementation("org.mariadb.jdbc:mariadb-java-client")
 	implementation("org.jsoup:jsoup:1.13.1")
+	implementation("org.apache.httpcomponents:httpclient:4.5.6")
+
 
 	runtimeOnly("com.h2database:h2")
 
