@@ -31,4 +31,5 @@ out/
 ### VS Code ###
 .vscode/
 
-/src/main/resources/config.properties
+config.properties
+secrets.tar

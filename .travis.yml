@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - openjdk8
+- openjdk8
 branches:
   only:
     - master
@@ -44,4 +44,6 @@ notifications:
     recipients:
       - hyojaedev@gmail.com
 before_install:
-  - openssl aes-256-cbc -K $encrypted_a2f764c3e6c9_key -iv $encrypted_a2f764c3e6c9_iv -in config.properties.enc -out config.properties -d
+  - openssl aes-256-cbc -K $encrypted_a2f764c3e6c9_key -iv $encrypted_a2f764c3e6c9_iv
+    -in secrets.tar.enc -out secrets.tar -d
+  - tar xvf secrets.tar
