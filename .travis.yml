@@ -44,6 +44,5 @@ notifications:
     recipients:
     - hyojaedev@gmail.com
 before_install:
-- openssl aes-256-cbc -K $encrypted_a2f764c3e6c9_key -iv $encrypted_a2f764c3e6c9_iv
-  -in secrets.tar.enc -out secrets.tar -d
-- tar xvf secrets.tar
+- openssl aes-256-cbc -K $encrypted_c24cfa0511b5_key -iv $encrypted_c24cfa0511b5_iv
+  -in config.properties.enc -out src/main/resources/config.properties -d
