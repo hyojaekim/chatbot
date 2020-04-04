@@ -66,7 +66,7 @@ internal class SubwayControllerTest {
             status { isOk }
             content { contentType(MediaType.APPLICATION_JSON) }
             jsonPath("$.template.outputs[0].simpleText.text") {
-                value("올바르지 않는 역이름 입니다.\nex) 잠실역(x) -> 잠실(o)")
+                value("올바르지 않는 역이름 또는 서버가 인식하지 못해서 발생한 문제일 수 있습니다.\n\n다시 한번 요청해주세요.")
             }
         }.andDo {
             print()
