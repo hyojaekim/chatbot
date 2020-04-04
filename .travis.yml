@@ -3,47 +3,47 @@ jdk:
 - openjdk8
 branches:
   only:
-    - master
+  - master
 cache:
   directories:
-    - "$HOME/.m2/repository"
-    - "$HOME/.gradle"
+  - "$HOME/.m2/repository"
+  - "$HOME/.gradle"
 script: "./gradlew clean build"
 before_deploy:
-  - zip -r kdu-chatbot-service *
-  - mkdir -p deploy
-  - mv kdu-chatbot-service.zip deploy/kdu-chatbot-service.zip
+- zip -r kdu-chatbot-service *
+- mkdir -p deploy
+- mv kdu-chatbot-service.zip deploy/kdu-chatbot-service.zip
 deploy:
-  - provider: s3
-    access_key_id: "$AWS_ACCESS_KEY"
-    secret_access_key: "$AWS_SECRET_KEY"
-    bucket: kdu-chatbot-service-deploy
-    region: ap-northeast-2
-    skip_cleanup: true
-    acl: public_read
-    wait-until-deployed: true
-    local_dir: deploy
-    on:
-      repo: hyojaekim/chatbot
-      branch: master
-  - provider: codedeploy
-    access_key_id: "$AWS_ACCESS_KEY"
-    secret_access_key: "$AWS_SECRET_KEY"
-    bucket: kdu-chatbot-service-deploy
-    key: kdu-chatbot-service.zip
-    bundle_type: zip
-    application: kdu-chatbot-service
-    deployment_group: kdu-chatbot-service-group
-    region: ap-northeast-2
-    wait-until-deployed: true
-    on:
-      repo: hyojaekim/chatbot
-      branch: master
+- provider: s3
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
+  bucket: kdu-chatbot-service-deploy
+  region: ap-northeast-2
+  skip_cleanup: true
+  acl: public_read
+  wait-until-deployed: true
+  local_dir: deploy
+  on:
+    repo: hyojaekim/chatbot
+    branch: master
+- provider: codedeploy
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
+  bucket: kdu-chatbot-service-deploy
+  key: kdu-chatbot-service.zip
+  bundle_type: zip
+  application: kdu-chatbot-service
+  deployment_group: kdu-chatbot-service-group
+  region: ap-northeast-2
+  wait-until-deployed: true
+  on:
+    repo: hyojaekim/chatbot
+    branch: master
 notifications:
   email:
     recipients:
-      - hyojaedev@gmail.com
+    - hyojaedev@gmail.com
 before_install:
-  - openssl aes-256-cbc -K $encrypted_a2f764c3e6c9_key -iv $encrypted_a2f764c3e6c9_iv
-    -in secrets.tar.enc -out secrets.tar -d
-  - tar xvf secrets.tar
+- openssl aes-256-cbc -K $encrypted_a2f764c3e6c9_key -iv $encrypted_a2f764c3e6c9_iv
+  -in secrets.tar.enc -out secrets.tar -d
+- tar xvf secrets.tar
