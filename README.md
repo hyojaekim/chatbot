@@ -1,6 +1,15 @@
 # 오픈빌더를 활용한 챗봇 서비스 ![Build Status](https://travis-ci.org/hyojaekim/chatbot.svg?branch=master)
 
-### [KDU 알림이](https://pf.kakao.com/_hdxaVj)
+### 📜 목차
+1. 소개
+2. 기능
+3. 구성
+4. 기술 스택
+5. TODO
+
+# 🗣 소개
+
+### [🏫 KDU 알림이](https://pf.kakao.com/_hdxaVj)
 
 캠퍼스 생활에 필요한 정보를 제공해주는 서비스 입니다.
 
@@ -8,7 +17,7 @@
 
 ![캠퍼스 알림이 통계](src/main/resources/static/img/캠퍼스알림이통계.png)
 
-### [코로나 정보](https://pf.kakao.com/_hUrGxb)
+### [🦠 코로나 정보](https://pf.kakao.com/_hUrGxb)
 
 코로나 관련된 정보를 제공하는 서비스 입니다.
 
@@ -16,7 +25,7 @@
 
 ![코로나 정보 통계](src/main/resources/static/img/코로나정보통계.png)
 
-# 기능
+# 🧩 기능
 
 ### #1 캠퍼스 알림이
 
@@ -59,13 +68,13 @@
 
 ---
 
-### 흐름
+# 🔷 구성
 
 ![사용자 요청](src/main/resources/static/img/flow.png)
 
 ![CI/CD](src/main/resources/static/img/flow2.png)
 
-### 기술 스택
+# 🛠 기술 스택
 
 ```
 Language : Kotlin
@@ -85,3 +94,15 @@ Repository : GitHub
 Issue Tracker : GitHub Issues, GitHub Kanban Board
 ```
 
+# ✅ TODO
+
+- [x] 무중단 배포
+- [x] CI/CD 구축
+- [x] 캠퍼스 설정
+- [x] 학식 메뉴 크롤링하여 저장
+- [x] 캠퍼스에 맞는 각 식당의 학식 메뉴 가져오기
+- [x] 학교 민원실 이동 안내
+- [x] 실시간 지하철 도착 정보
+- [x] 재택 수업 Tip
+- [x] 마스크 5부제 (구매 가능한 요일)
+- [ ] 반경 2km 마스크 재고
