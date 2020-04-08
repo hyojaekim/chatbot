@@ -20,16 +20,6 @@
 
 ### #1 캠퍼스 알림이
 
-![캠퍼스 알림이 메뉴](src/main/resources/static/img/캠퍼스알림이메뉴.png)
-
-![캠퍼스 설정](src/main/resources/static/img/캠퍼스설정.png)
-
-![학식 메뉴](src/main/resources/static/img/학식메뉴.png)
-
-![지하철 정보](src/main/resources/static/img/지하철정보.png)
-
-![기타 정보](src/main/resources/static/img/기타.png)
-
 | 분류 | 기능 | 구현여부(Y/N) |
 | :---: | :---: | :---: |
 | KDU 알림이 | 학식 메뉴 | Y |
@@ -41,11 +31,17 @@
 | | 날씨 | N |
 | | 자주 사용하는 학교 홈페이지 | N |
 
+![캠퍼스 알림이 메뉴](src/main/resources/static/img/캠퍼스알림이메뉴.png)
+
+![캠퍼스 설정](src/main/resources/static/img/캠퍼스설정.png)
+
+![학식 메뉴](src/main/resources/static/img/학식메뉴.png)
+
+![지하철 정보](src/main/resources/static/img/지하철정보.png)
+
+![기타 정보](src/main/resources/static/img/기타.png)
+
 ### #2 코로나 정보
-
-![코로나 정보 메뉴](src/main/resources/static/img/코로나정보메뉴.png)
-
-![코로나 기타 정보](src/main/resources/static/img/코로나기타정보.png)
 
 | 분류 | 기능 | 구현여부(Y/N) |
 | :---: | :---: | :---: |
@@ -56,6 +52,10 @@
 | | 예방 수칙 | Y |
 | | 의심증상 | Y |
 | | 마스크 재고 (직접 개발) | N |
+
+![코로나 정보 메뉴](src/main/resources/static/img/코로나정보메뉴.png)
+
+![코로나 기타 정보](src/main/resources/static/img/코로나기타정보.png)
 
 ---
 
