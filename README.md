@@ -67,6 +67,8 @@
 
 ![코로나 기타 정보](src/main/resources/static/img/코로나기타정보.png)
 
+![마스크 재고](src/main/resources/static/img/마스크재고.png)
+
 ---
 
 # 👉🏻 구성
