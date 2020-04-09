@@ -12,7 +12,7 @@ class SubwayInternalService(val restTemplate: RestTemplate, val environment: Env
 
     fun find(station: String): SubwayInfo {
         val key = environment.getProperty("subway.key") ?: throw NotFoundSubwayException()
-        val uri = UriFactory.getUri(key, station)
+        val uri = UriFactory.createSubwayUri(key, station)
         val subwayInfo = restTemplate.getForObject(uri, SubwayInfo::class.java) ?: throw NotFoundSubwayException()
         if (!subwayInfo.isOk()) throw NotFoundSubwayException()
         return subwayInfo

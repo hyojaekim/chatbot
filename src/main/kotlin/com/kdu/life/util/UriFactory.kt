@@ -12,7 +12,7 @@ class UriFactory private constructor() {
         private const val MINIMUM_SIZE = "0"
         private const val MAXIMUM_SIZE = "5"
 
-        fun getUri(key: String, station: String): URI {
+        fun createSubwayUri(key: String, station: String): URI {
             return UriComponentsBuilder.newInstance()
                     .scheme(HTTP)
                     .host(SUBWAY_HOST)

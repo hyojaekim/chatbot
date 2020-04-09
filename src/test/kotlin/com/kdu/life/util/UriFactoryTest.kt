@@ -7,6 +7,6 @@ internal class UriFactoryTest {
 
     @Test
     internal fun `정상적으로 URI를 생성한다`() {
-        assertNotNull(UriFactory.getUri("key", "의정부"))
+        assertNotNull(UriFactory.createSubwayUri("key", "의정부"))
     }
 }
