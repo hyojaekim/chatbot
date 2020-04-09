@@ -3,8 +3,8 @@ package com.kdu.life.application
 import com.kdu.life.domain.MaskStock
 import com.kdu.life.domain.MaskStockInfo
 import com.kdu.life.exception.MaskStockRequestFailException
+import com.kdu.life.presentation.dto.LocationDto
 import com.kdu.life.presentation.dto.MaskPurchaseInfoRequestDto
-import com.kdu.life.presentation.dto.MaskStockRequestDto
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
@@ -39,7 +39,7 @@ internal class MaskServiceTest {
         whenever(maskInternalService.requestMaskStockInfo(any()))
                 .thenReturn(MaskStockInfo(1, arrayListOf(testMaskStock)))
 
-        val result = maskService.findMaskStockInfo(MaskStockRequestDto(31.0, 53.42))
+        val result = maskService.findMaskStockInfo(LocationDto(31.0, 53.42))
 
         assertNotNull(result)
         assertThat(result.size).isEqualTo(1)
@@ -50,7 +50,7 @@ internal class MaskServiceTest {
         whenever(maskInternalService.requestMaskStockInfo(any())).thenThrow(MaskStockRequestFailException())
 
         assertThrows<MaskStockRequestFailException> {
-            maskService.findMaskStockInfo(MaskStockRequestDto(31.0, 53.42))
+            maskService.findMaskStockInfo(LocationDto(31.0, 53.42))
         }
     }
 }
