@@ -1,11 +1,12 @@
 # 오픈빌더를 활용한 챗봇 서비스 ![Build Status](https://travis-ci.org/hyojaekim/chatbot.svg?branch=master)
 
 ### 📜 목차
-1. 소개
-2. 기능
-3. 구성
-4. 기술 스택
-5. TODO
+* [소개](https://github.com/hyojaekim/chatbot#-%EC%86%8C%EA%B0%9C)
+* [기능](https://github.com/hyojaekim/chatbot#-%EA%B8%B0%EB%8A%A5)
+* [구성](https://github.com/hyojaekim/chatbot#-%EA%B5%AC%EC%84%B1)
+* [기술 스택](https://github.com/hyojaekim/chatbot#-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
+* [Wiki]()
+* [TODO](https://github.com/hyojaekim/chatbot#-todo)
 
 # 🗣 소개
 
@@ -60,7 +61,7 @@
 | | 마스크 5부제 (구매 가능한 날짜) | Y |
 | | 예방 수칙 | Y |
 | | 의심증상 | Y |
-| | 마스크 재고 (직접 개발) | N |
+| | 마스크 재고 (직접 개발) | Y |
 
 ![코로나 정보 메뉴](src/main/resources/static/img/코로나정보메뉴.png)
 
@@ -68,7 +69,7 @@
 
 ---
 
-# 🔷 구성
+# 👉🏻 구성
 
 ![사용자 요청](src/main/resources/static/img/flow.png)
 
@@ -94,6 +95,16 @@ Repository : GitHub
 Issue Tracker : GitHub Issues, GitHub Kanban Board
 ```
 
+# [Wiki](https://github.com/hyojaekim/chatbot/wiki)
+
+- [DB 방언 문제](https://github.com/hyojaekim/chatbot/wiki/DB-%EB%B0%A9%EC%96%B8-%EB%AC%B8%EC%A0%9C-(MySQL5InnoDBDialect-Deprecated))
+- [OSIV](https://github.com/hyojaekim/chatbot/wiki/OSIV-(Open-Session-In-View)-%EB%AC%B8%EC%A0%9C%EC%A0%90)
+- [JSON 라이브러리 선택하기](https://github.com/hyojaekim/chatbot/wiki/JSON-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%84%A0%ED%83%9D-%EA%B8%B0%EC%A4%80)
+- [크롤링을 위한 라이브러리 선택](https://github.com/hyojaekim/chatbot/wiki/%ED%81%AC%EB%A1%A4%EB%A7%81%EC%9D%84-%EC%9C%84%ED%95%9C-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%84%A0%EC%A0%95-(Jsoup))
+- [지하철 정보](https://github.com/hyojaekim/chatbot/wiki/%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%A7%80%ED%95%98%EC%B2%A0-%EC%A0%95%EB%B3%B4)
+- [마스크 재고 정보](https://github.com/hyojaekim/chatbot/wiki/%EB%A7%88%EC%8A%A4%ED%81%AC-%EC%9E%AC%EA%B3%A0-%EC%A0%95%EB%B3%B4-%EC%98%88%EC%8B%9C)
+- [주소로 위도, 경도 알아내기](https://github.com/hyojaekim/chatbot/wiki/%EC%A3%BC%EC%86%8C-%EC%9C%84%EB%8F%84,-%EA%B2%BD%EB%8F%84-%EC%95%8C%EC%95%84%EB%82%B4%EA%B8%B0)
+
 # ✅ TODO
 
 - [x] 무중단 배포
@@ -105,4 +116,5 @@ Issue Tracker : GitHub Issues, GitHub Kanban Board
 - [x] 실시간 지하철 도착 정보
 - [x] 재택 수업 Tip
 - [x] 마스크 5부제 (구매 가능한 요일)
-- [ ] 반경 2km 마스크 재고
+- [x] 주소로 위도와 경도 찾기
+- [x] 반경 2km 마스크 재고

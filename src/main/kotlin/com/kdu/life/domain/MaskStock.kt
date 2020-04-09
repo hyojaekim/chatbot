@@ -24,7 +24,7 @@ data class MaskStock(
     }
 
     override fun toString(): String {
-        return StringBuffer().append("[$addr]")
+        return StringBuffer().append("$addr")
                 .append(NEW_LINE + NEW_LINE)
                 .append("[재고 상태] $remain_stat")
                 .append(NEW_LINE + NEW_LINE)

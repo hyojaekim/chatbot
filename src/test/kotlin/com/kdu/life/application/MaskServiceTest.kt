@@ -3,6 +3,7 @@ package com.kdu.life.application
 import com.kdu.life.domain.MaskStock
 import com.kdu.life.domain.MaskStockInfo
 import com.kdu.life.exception.MaskStockRequestFailException
+import com.kdu.life.presentation.dto.AddressRequestDto
 import com.kdu.life.presentation.dto.LocationDto
 import com.kdu.life.presentation.dto.MaskPurchaseInfoRequestDto
 import com.nhaarman.mockitokotlin2.any
@@ -21,6 +22,9 @@ import kotlin.test.assertNotNull
 internal class MaskServiceTest {
 
     @Mock
+    lateinit var addressService: AddressService
+
+    @Mock
     lateinit var maskInternalService: MaskInternalService
 
     @InjectMocks
@@ -36,10 +40,11 @@ internal class MaskServiceTest {
     @Test
     internal fun `정상적으로 위도와 경도로 마스크 재고 정보를 알 수 있다`() {
         val testMaskStock = MaskStock("test", "test", "test", "some", "test", "01")
+        whenever(addressService.getLatitudeAndLongitude(any())).thenReturn(LocationDto(30.5, 53.43))
         whenever(maskInternalService.requestMaskStockInfo(any()))
                 .thenReturn(MaskStockInfo(1, arrayListOf(testMaskStock)))
 
-        val result = maskService.findMaskStockInfo(LocationDto(31.0, 53.42))
+        val result = maskService.findMaskStockInfo(AddressRequestDto("의정부역"))
 
         assertNotNull(result)
         assertThat(result.size).isEqualTo(1)
@@ -47,10 +52,20 @@ internal class MaskServiceTest {
 
     @Test
     internal fun `마스크 재고 정보를 요청할때 예외가 발생하는 경우`() {
+        whenever(addressService.getLatitudeAndLongitude(any())).thenReturn(LocationDto(30.5, 53.43))
         whenever(maskInternalService.requestMaskStockInfo(any())).thenThrow(MaskStockRequestFailException())
 
         assertThrows<MaskStockRequestFailException> {
-            maskService.findMaskStockInfo(LocationDto(31.0, 53.42))
+            maskService.findMaskStockInfo(AddressRequestDto("의정부역"))
+        }
+    }
+
+    @Test
+    internal fun `위도 경도를 찾을 수 없는 경우 예외가 발생한다`() {
+        whenever(addressService.getLatitudeAndLongitude(any())).thenThrow(IllegalArgumentException())
+
+        assertThrows<MaskStockRequestFailException> {
+            maskService.findMaskStockInfo(AddressRequestDto("의정부역"))
         }
     }
 }

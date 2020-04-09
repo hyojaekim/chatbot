@@ -14,5 +14,6 @@ class WebMvcConfig : WebMvcConfigurer {
         resolvers.add(KakaoInfoArgumentResolver())
         resolvers.add(CampusFoodArgumentResolver())
         resolvers.add(SubwayInfoArgumentResolver())
+        resolvers.add(AddressArgumentResolver())
     }
 }
