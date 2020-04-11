@@ -14,7 +14,7 @@
 
 캠퍼스 생활에 필요한 정보를 제공해주는 서비스 입니다.
 
-(20.04.08 기준)
+20.04.11 (04.08 기준으로 37명 증가)
 
 ![캠퍼스 알림이 통계](src/main/resources/static/img/캠퍼스알림이통계.png)
 
@@ -22,7 +22,7 @@
 
 코로나 관련된 정보를 제공하는 서비스 입니다.
 
-(20.04.08 기준)
+20.04.11 (04.08 기준으로 9명 증가)
 
 ![코로나 정보 통계](src/main/resources/static/img/코로나정보통계.png)
 
@@ -107,6 +107,7 @@ Issue Tracker : GitHub Issues, GitHub Kanban Board
 - [마스크 재고 정보](https://github.com/hyojaekim/chatbot/wiki/%EB%A7%88%EC%8A%A4%ED%81%AC-%EC%9E%AC%EA%B3%A0-%EC%A0%95%EB%B3%B4-%EC%98%88%EC%8B%9C)
 - [주소로 위도, 경도 알아내기](https://github.com/hyojaekim/chatbot/wiki/%EC%A3%BC%EC%86%8C-%EC%9C%84%EB%8F%84,-%EA%B2%BD%EB%8F%84-%EC%95%8C%EC%95%84%EB%82%B4%EA%B8%B0)
 - [중요한 키값 관리하기](https://hyojaedev.tistory.com/13)
+- [시리로 배포하기](https://hyojaedev.tistory.com/15)
 
 # ✅ TODO
 
@@ -121,3 +122,6 @@ Issue Tracker : GitHub Issues, GitHub Kanban Board
 - [x] 마스크 5부제 (구매 가능한 요일)
 - [x] 주소로 위도와 경도 찾기
 - [x] 반경 2km 마스크 재고
+- [x] Siri로 배포하기
+- [ ] 지하철 도착 정보 즐겨찾기
+- [ ] 미세먼지 및 날씨
