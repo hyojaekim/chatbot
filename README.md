@@ -1,10 +1,12 @@
-![통계](src/main/resources/static/img/통계.png)
+# 오픈빌더를 활용한 챗봇 서비스 ![Build Status](https://travis-ci.org/hyojaekim/chatbot.svg?branch=master)
 
-### 오픈빌더를 활용한 챗봇 서비스 ![Build Status](https://travis-ci.org/hyojaekim/chatbot.svg?branch=master)
+![통계](src/main/resources/static/img/통계.png)
 
 ---
 
-### 📜 목차
+<br/><br/>
+
+## 📜 목차
 * [소개](https://github.com/hyojaekim/chatbot#-%EC%86%8C%EA%B0%9C)
 * [기능](https://github.com/hyojaekim/chatbot#-%EA%B8%B0%EB%8A%A5)
 * [구성](https://github.com/hyojaekim/chatbot#-%EA%B5%AC%EC%84%B1)
@@ -12,19 +14,23 @@
 * [Wiki](https://github.com/hyojaekim/chatbot#wiki)
 * [TODO](https://github.com/hyojaekim/chatbot#-todo)
 
-### 🗣 소개
+<br/><br/>
 
-##### [🏫 KDU 알림이](https://pf.kakao.com/_hdxaVj)
+## 🗣 소개
+
+#### [🏫 KDU 알림이](https://pf.kakao.com/_hdxaVj)
 
 캠퍼스 생활에 필요한 정보를 제공해주는 서비스 입니다.
 
-##### [🦠 코로나 정보](https://pf.kakao.com/_hUrGxb)
+#### [🦠 코로나 정보](https://pf.kakao.com/_hUrGxb)
 
 코로나 관련된 정보를 제공하는 서비스 입니다.
 
-### 🧩 기능
+<br/><br/>
 
-##### #1 캠퍼스 알림이
+## 🧩 기능
+
+#### #1 캠퍼스 알림이
 
 | 분류 | 기능 | 구현여부(Y/N) |
 | :---: | :---: | :---: |
@@ -50,7 +56,7 @@
 
 ![기타 정보](src/main/resources/static/img/기타.png)
 
-##### #2 코로나 정보
+#### #2 코로나 정보
 
 | 분류 | 기능 | 구현여부(Y/N) |
 | :---: | :---: | :---: |
@@ -67,15 +73,17 @@
 
 ![마스크 재고](src/main/resources/static/img/마스크재고.png)
 
----
+<br/><br/>
 
-# 👉🏻 구성
+## 👉🏻 구성
 
 ![사용자 요청](src/main/resources/static/img/flow.png)
 
 ![CI/CD](src/main/resources/static/img/flow2.png)
 
-# 🛠 기술 스택
+<br/><br/>
+
+## 🛠 기술 스택
 
 ```
 Language : Kotlin
@@ -95,7 +103,9 @@ Repository : GitHub
 Issue Tracker : GitHub Issues, GitHub Kanban Board
 ```
 
-# [Wiki](https://github.com/hyojaekim/chatbot/wiki)
+<br/><br/>
+
+## [Wiki](https://github.com/hyojaekim/chatbot/wiki)
 
 - [DB 방언 문제](https://github.com/hyojaekim/chatbot/wiki/DB-%EB%B0%A9%EC%96%B8-%EB%AC%B8%EC%A0%9C-(MySQL5InnoDBDialect-Deprecated))
 - [OSIV](https://github.com/hyojaekim/chatbot/wiki/OSIV-(Open-Session-In-View)-%EB%AC%B8%EC%A0%9C%EC%A0%90)
@@ -107,7 +117,9 @@ Issue Tracker : GitHub Issues, GitHub Kanban Board
 - [중요한 키값 관리하기](https://hyojaedev.tistory.com/13)
 - [시리로 배포하기](https://hyojaedev.tistory.com/15)
 
-# ✅ TODO
+<br/><br/>
+
+## ✅ TODO
 
 - [x] 무중단 배포
 - [x] CI/CD 구축
