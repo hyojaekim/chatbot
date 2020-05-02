@@ -1,4 +1,8 @@
-# 오픈빌더를 활용한 챗봇 서비스 ![Build Status](https://travis-ci.org/hyojaekim/chatbot.svg?branch=master)
+![통계](src/main/resources/static/img/통계.png)
+
+### 오픈빌더를 활용한 챗봇 서비스 ![Build Status](https://travis-ci.org/hyojaekim/chatbot.svg?branch=master)
+
+---
 
 ### 📜 목차
 * [소개](https://github.com/hyojaekim/chatbot#-%EC%86%8C%EA%B0%9C)
@@ -8,27 +12,19 @@
 * [Wiki](https://github.com/hyojaekim/chatbot#wiki)
 * [TODO](https://github.com/hyojaekim/chatbot#-todo)
 
-# 🗣 소개
+### 🗣 소개
 
-### [🏫 KDU 알림이](https://pf.kakao.com/_hdxaVj)
+##### [🏫 KDU 알림이](https://pf.kakao.com/_hdxaVj)
 
 캠퍼스 생활에 필요한 정보를 제공해주는 서비스 입니다.
 
-20.04.14 (04.08 기준으로 84명 증가)
-
-![캠퍼스 알림이 통계](src/main/resources/static/img/캠퍼스알림이통계.png)
-
-### [🦠 코로나 정보](https://pf.kakao.com/_hUrGxb)
+##### [🦠 코로나 정보](https://pf.kakao.com/_hUrGxb)
 
 코로나 관련된 정보를 제공하는 서비스 입니다.
 
-20.04.14 (04.08 기준으로 11명 증가)
+### 🧩 기능
 
-![코로나 정보 통계](src/main/resources/static/img/코로나정보통계.png)
-
-# 🧩 기능
-
-### #1 캠퍼스 알림이
+##### #1 캠퍼스 알림이
 
 | 분류 | 기능 | 구현여부(Y/N) |
 | :---: | :---: | :---: |
@@ -38,6 +34,7 @@
 | | 학교 민원실 정보 | Y |
 | | 재택 수업 Tip | Y |
 | | 버스 시간표 | Y |
+| | 중고 거래 | N |
 | | 지하철역 즐겨찾기 | N |
 | | 연락처 검색 (주변 가게 혹은 학교 전화번호) | N |
 | | 날씨 | N |
@@ -53,7 +50,7 @@
 
 ![기타 정보](src/main/resources/static/img/기타.png)
 
-### #2 코로나 정보
+##### #2 코로나 정보
 
 | 분류 | 기능 | 구현여부(Y/N) |
 | :---: | :---: | :---: |
@@ -124,6 +121,10 @@ Issue Tracker : GitHub Issues, GitHub Kanban Board
 - [x] 주소로 위도와 경도 찾기
 - [x] 반경 2km 마스크 재고
 - [x] Siri로 배포하기
+- [ ] 중고 거래
+  - [ ] 게시글 작성(제목, 내용, 오픈 채팅 링크)
+  - [ ] 게시글 조회
+  - [ ] 게시글 삭제
 - [ ] 지하철 도착 정보 즐겨찾기
   - [ ] 즐겨찾기 추가
   - [ ] 즐겨찾기 삭제
