@@ -13,5 +13,5 @@ data class EventUser(
         val kakaoId: String,
         var winner: Boolean
 ) {
-    constructor(kakaoId: String) : this(null, kakaoId, Math.random() < 0.37)
+    constructor(kakaoId: String) : this(null, kakaoId, Math.random() < 0.35)
 }
