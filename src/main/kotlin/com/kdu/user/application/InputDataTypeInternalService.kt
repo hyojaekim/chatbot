@@ -14,4 +14,10 @@ class InputDataTypeInternalService(private val inputDataTypeRepository: InputDat
         val inputDataType = InputDataType(inputDataTypeRequestDto.type, inputDataTypeRequestDto.synonym)
         inputDataTypeRepository.save(inputDataType)
     }
+
+    fun delete(id: Long) {
+        if (inputDataTypeRepository.existsById(id)) {
+            inputDataTypeRepository.deleteById(id)
+        }
+    }
 }

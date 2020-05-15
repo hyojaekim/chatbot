@@ -21,4 +21,12 @@ internal class UserInputDataApiControllerTest {
                 .exchange()
                 .expectStatus().isOk
     }
+
+    @Test
+    internal fun `정상적으로 데이터 타입을 삭제한다`() {
+        webTestClient.delete()
+                .uri("/api/user/data/type/1")
+                .exchange()
+                .expectStatus().isOk
+    }
 }
