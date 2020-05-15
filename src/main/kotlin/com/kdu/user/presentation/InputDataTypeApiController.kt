@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class UserInputDataApiController(private val inputDataTypeInternalService: InputDataTypeInternalService) {
+class InputDataTypeApiController(private val inputDataTypeInternalService: InputDataTypeInternalService) {
 
     @PostMapping("/api/user/data/type")
     fun save(inputDataTypeRequestDto: InputDataTypeRequestDto): ResponseEntity<Void> {

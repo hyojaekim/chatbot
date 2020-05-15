@@ -7,7 +7,7 @@ import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-internal class UserInputDataApiControllerTest {
+internal class InputDataTypeApiControllerTest {
 
     @Autowired
     private lateinit var webTestClient: WebTestClient
