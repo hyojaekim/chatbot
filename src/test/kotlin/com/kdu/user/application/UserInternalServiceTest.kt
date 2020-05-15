@@ -2,7 +2,7 @@ package com.kdu.user.application
 
 import com.kdu.user.domain.Campus
 import com.kdu.user.domain.User
-import com.kdu.user.domain.UserRepository
+import com.kdu.user.domain.repository.UserRepository
 import com.kdu.user.exception.NotFoundUserException
 import com.kdu.user.presentation.dto.UserInfoRequestDto
 import com.nhaarman.mockitokotlin2.*

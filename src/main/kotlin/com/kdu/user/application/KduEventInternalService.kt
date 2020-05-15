@@ -1,7 +1,7 @@
 package com.kdu.user.application
 
 import com.kdu.user.domain.EventUser
-import com.kdu.user.domain.EventUserRepository
+import com.kdu.user.domain.repository.EventUserRepository
 import com.kdu.user.exception.DuplicateKduEventException
 import com.kdu.user.exception.EventCloseException
 import org.springframework.stereotype.Service
