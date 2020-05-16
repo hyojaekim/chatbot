@@ -10,14 +10,21 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class InputDataTypeInternalService(private val inputDataTypeRepository: InputDataTypeRepository) {
 
-    fun save(inputDataTypeRequestDto: InputDataTypeRequestDto) {
+    fun save(inputDataTypeRequestDto: InputDataTypeRequestDto): Long {
         val inputDataType = InputDataType(inputDataTypeRequestDto.type, inputDataTypeRequestDto.synonym)
-        inputDataTypeRepository.save(inputDataType)
+        return inputDataTypeRepository.save(inputDataType).id!!
     }
 
-    fun delete(id: Long) {
+    fun delete(id: Long): Boolean {
         if (inputDataTypeRepository.existsById(id)) {
             inputDataTypeRepository.deleteById(id)
+            return true
         }
+        return false
+    }
+
+    @Transactional(readOnly = true)
+    fun findByContainsData(text: String): InputDataType? {
+        return inputDataTypeRepository.findTypeWithSynonym(text)
     }
 }
