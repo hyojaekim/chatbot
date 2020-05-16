@@ -16,5 +16,6 @@ class WebMvcConfig : WebMvcConfigurer {
         resolvers.add(SubwayInfoArgumentResolver())
         resolvers.add(AddressArgumentResolver())
         resolvers.add(QrCodeArgumentResolver())
+        resolvers.add(UserInputDataArgumentResolver())
     }
 }
