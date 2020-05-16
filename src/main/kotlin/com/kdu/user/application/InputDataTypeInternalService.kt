@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional
 class InputDataTypeInternalService(private val inputDataTypeRepository: InputDataTypeRepository) {
 
     fun save(inputDataTypeRequestDto: InputDataTypeRequestDto): Long {
+        if (inputDataTypeRepository.existsBySynonym(inputDataTypeRequestDto.synonym)) {
+            return inputDataTypeRepository.findBySynonym(inputDataTypeRequestDto.synonym).id!!
+        }
         val inputDataType = InputDataType(inputDataTypeRequestDto.type, inputDataTypeRequestDto.synonym)
         return inputDataTypeRepository.save(inputDataType).id!!
     }

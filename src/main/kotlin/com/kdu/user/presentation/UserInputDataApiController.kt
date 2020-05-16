@@ -1,5 +1,6 @@
 package com.kdu.user.presentation
 
+import com.kdu.common.message.ResponseMessage
 import com.kdu.user.application.UserInputDataService
 import com.kdu.user.presentation.dto.UserInputDataRequestDto
 import org.springframework.http.ResponseEntity
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.RestController
 class UserInputDataApiController(private val userInputDataService: UserInputDataService) {
 
     @PostMapping
-    fun saveUserInputData(userInputDataRequestDto: UserInputDataRequestDto): ResponseEntity<Void> {
+    fun saveUserInputData(userInputDataRequestDto: UserInputDataRequestDto): ResponseEntity<String> {
         userInputDataService.save(userInputDataRequestDto)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(ResponseMessage.Builder()
+                .simpleText("정상적으로 저장되었습니다.")
+                .build()
+                .toString())
     }
 }

@@ -9,4 +9,8 @@ interface InputDataTypeRepository : JpaRepository<InputDataType, Long> {
 
     @Query(value = "select * from input_data_type where :text like concat('%', synonym, '%')", nativeQuery = true)
     fun findTypeWithSynonym(@Param("text") text: String): InputDataType?
+
+    fun existsBySynonym(synonym: String): Boolean
+
+    fun findBySynonym(synonym: String): InputDataType
 }

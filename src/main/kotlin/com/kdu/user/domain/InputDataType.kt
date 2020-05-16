@@ -1,9 +1,6 @@
 package com.kdu.user.domain
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 data class InputDataType private constructor(
@@ -11,6 +8,7 @@ data class InputDataType private constructor(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long?,
         val type: String,
+        @Column(unique = true)
         val synonym: String
 ) {
     constructor(type: String, synonym: String) : this(null, type, synonym)

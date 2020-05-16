@@ -7,6 +7,7 @@ data class UserInputData private constructor(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long?,
+        @Column(unique = true)
         val text: String,
         var count: Int,
         @ManyToOne(fetch = FetchType.LAZY)
