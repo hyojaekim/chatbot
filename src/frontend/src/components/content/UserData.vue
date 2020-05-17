@@ -32,7 +32,7 @@
                         sortable: false,
                         value: 'text',
                     },
-                    { text: '타입', value: 'type' },
+                    { text: '유형', value: 'type' },
                     { text: '동의어', value: 'synonym' },
                     { text: '조회수', value: 'count' },
                 ],

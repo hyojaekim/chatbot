@@ -134,6 +134,10 @@
                                 text: '조회하기',
                                 contentNumber: 2,
                             },
+                            {
+                                text: '추가하기',
+                                contentNumber: 0,
+                            },
                         ]
                     },
                 ],
