@@ -1,35 +1,39 @@
 <template>
     <v-card
             height="100%"
-            class="overflow-hidden"
+            width="256"
+            color="black"
     >
-        <v-navigation-drawer
-                v-model="drawer"
-                :color="color"
-                :expand-on-hover="expandOnHover"
-                :mini-variant="miniVariant"
-                :right="right"
-                :permanent="permanent"
-                absolute
-                dark
-        >
+        <v-navigation-drawer permanent dark style="border-top-left-radius: 0; border-bottom-left-radius: 0">
+            <v-list>
+                <v-list-item style="padding-top: 17px">
+                    <v-badge v-model="show" overlap style="margin-left: auto; margin-right: auto">
+                        <span slot="badge">Admin</span>
+                        <v-avatar
+                                color="grey lighten-2"
+                                size="85"
+                                @click.native="show = !show"
+                                style="cursor: pointer"
+                        >
+                            <v-icon dark size="50" color="white">mdi-account-star</v-icon>
+                        </v-avatar>
+                    </v-badge>
+                </v-list-item>
+                <v-list-item style="text-align: center">
+                    <v-list-item-content>
+                        <v-list-item-title class="title">
+                            Hyojae Kim
+                        </v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+
+            <v-divider></v-divider>
+
             <v-list
                     dense
                     nav
-                    class="py-0"
             >
-                <v-list-item three-line :class="miniVariant && 'px-0'">
-                    <v-list-item-avatar>
-                        <img src="https://randomuser.me/api/portraits/men/81.jpg">
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                        <v-list-item-title>Admin</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-
-                <v-divider></v-divider>
-
                 <v-list-item
                         v-for="item in items"
                         :key="item.title"
@@ -53,19 +57,21 @@
         name: "SideBar",
         data () {
             return {
-                drawer: true,
+                show: false,
+                badgeData: { value: '!' },
                 items: [
                     { title: '사용자 데이터', icon: 'mdi-chart-bar' },
-                    { title: '타입 및 동의어 조회', icon: 'mdi-tag-multiple' },
-                    { title: '타입 및 동의어 추가', icon: 'mdi-playlist-plus' },
+                    { title: '타입 및 동의어 조회', icon: 'mdi-label' },
+                    { title: '타입 및 동의어 추가', icon: 'mdi-plus-circle-outline' },
                 ],
                 right: false,
-                permanent: true,
-                miniVariant: false,
-                expandOnHover: false,
-                background: false,
             }
         },
+        computed: {
+            badge () {
+                return this.show ? this.badgeData : null
+            }
+        }
     }
 </script>
 
