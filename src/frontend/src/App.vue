@@ -1,58 +1,50 @@
 <template>
-  <v-app>
-<!--    <v-app-bar-->
-<!--      app-->
-<!--      color="black"-->
-<!--      dark-->
-<!--    >-->
-<!--      <div class="d-flex align-center">-->
-<!--        <v-img-->
-<!--          alt="Vuetify Logo"-->
-<!--          class="shrink mr-2"-->
-<!--          contain-->
-<!--          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"-->
-<!--          transition="scale-transition"-->
-<!--          width="40"-->
-<!--        />-->
-
-<!--        <v-img-->
-<!--          alt="Vuetify Name"-->
-<!--          class="shrink mt-1 hidden-sm-and-down"-->
-<!--          contain-->
-<!--          min-width="100"-->
-<!--          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"-->
-<!--          width="100"-->
-<!--        />-->
-<!--      </div>-->
-
-<!--      <v-spacer></v-spacer>-->
-
-<!--      <v-btn-->
-<!--        href="https://github.com/vuetifyjs/vuetify/releases/latest"-->
-<!--        target="_blank"-->
-<!--        text-->
-<!--      >-->
-<!--        <span class="mr-2">Latest Release</span>-->
-<!--        <v-icon>mdi-open-in-new</v-icon>-->
-<!--      </v-btn>-->
-<!--    </v-app-bar>-->
-
-    <SideBar />
-  </v-app>
+    <v-app id="inspire">
+        <SideBar></SideBar>
+        <v-app-bar
+                :clipped-left="$vuetify.breakpoint.lgAndUp"
+                app
+                color="grey lighten-5"
+        >
+            <v-app-bar-nav-icon @click.stop = toggleSideBar></v-app-bar-nav-icon>
+            <v-toolbar-title
+                    style="width: 300px"
+                    class="ml-0 pl-4"
+            >
+                <span class="hidden-sm-and-down">Chatbot Admin</span>
+            </v-toolbar-title>
+            <v-text-field
+                    flat
+                    solo-inverted
+                    hide-details
+                    prepend-inner-icon="mdi-magnify"
+                    label="Search"
+                    class="hidden-sm-and-down"
+                    style="padding-right: 10%"
+            ></v-text-field>
+        </v-app-bar>
+        <Contents></Contents>
+    </v-app>
 </template>
 
 <script>
-import SideBar from "./components/side/SideBar";
+    import SideBar from "./components/side/SideBar";
+    import Contents from "./components/content/Contents";
+    import { EventBus } from "./utils/event-bus";
 
-export default {
-  name: 'App',
+    export default {
+        name: 'App',
 
-  components: {
-    SideBar,
-  },
-
-  data: () => ({
-    //
-  }),
-};
+        components: {
+            Contents,
+            SideBar,
+        },
+        methods: {
+            toggleSideBar() {
+                EventBus.$emit("use-eventbus-toggle-side-bar")
+            }
+        },
+        data: () => ({
+        }),
+    };
 </script>
