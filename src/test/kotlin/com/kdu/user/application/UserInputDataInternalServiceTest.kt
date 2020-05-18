@@ -30,7 +30,7 @@ internal class UserInputDataInternalServiceTest {
     @Test
     internal fun `이미 저장된 데이터인 경우 count가 증가한다`() {
         val text = "hello world"
-        val inputDataType = inputDataTypeRepository.save(InputDataType("hi", "hello"))
+        val inputDataType = inputDataTypeRepository.save(InputDataType("hi", "hello2"))
         userInputDataInternalService.save(text, inputDataType)
         val savedUserInputData = userInputDataInternalService.save(text, inputDataType)
 
