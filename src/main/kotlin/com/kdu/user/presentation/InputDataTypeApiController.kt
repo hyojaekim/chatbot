@@ -17,7 +17,11 @@ class InputDataTypeApiController(private val inputDataTypeInternalService: Input
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long): ResponseEntity<Void> {
-        inputDataTypeInternalService.delete(id)
+        try {
+            inputDataTypeInternalService.delete(id)
+        } catch (e: Exception) {
+            println(e)
+        }
         return ResponseEntity.ok().build()
     }
 }
