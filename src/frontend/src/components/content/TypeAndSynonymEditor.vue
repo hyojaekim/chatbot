@@ -10,22 +10,22 @@
                         <v-form>
                             <v-text-field
                                     label="유형"
-                                    name="type"
                                     prepend-icon="mdi-image-filter-none"
                                     type="text"
+                                    v-model="type"
                             ></v-text-field>
 
                             <v-text-field
                                     label="동의어"
-                                    name="synonym"
                                     prepend-icon="mdi-comment-text-outline"
                                     type="text"
+                                    v-model="synonym"
                             ></v-text-field>
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary">저장</v-btn>
+                        <v-btn color="primary" @click="saveTypeAndSynonym">저장</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-col>
@@ -34,8 +34,29 @@
 </template>
 
 <script>
+    import API from "../../utils/api";
+
     export default {
-        name: "CreatorTypeAndSynonym"
+        name: "TypeAndSynonymEditor",
+        data() {
+            return {
+                type: '',
+                synonym: '',
+            }
+        },
+        methods: {
+            saveTypeAndSynonym() {
+                let formData = new FormData();
+                formData.append('type', this.type);
+                formData.append('synonym', this.synonym);
+                API.post('/user/data/type', formData)
+                    .then( (res) => {
+                        if (res.status === 200) {
+                            alert("정상적으로 저장되었습니다.")
+                        }
+                    }).catch(() => alert("오류가 발생하였습니다."))
+            }
+        },
     }
 </script>
 

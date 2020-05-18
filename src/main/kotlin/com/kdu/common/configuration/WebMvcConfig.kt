@@ -3,6 +3,7 @@ package com.kdu.common.configuration
 import com.kdu.common.resolver.*
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.method.support.HandlerMethodArgumentResolver
+import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
@@ -17,5 +18,10 @@ class WebMvcConfig : WebMvcConfigurer {
         resolvers.add(AddressArgumentResolver())
         resolvers.add(QrCodeArgumentResolver())
         resolvers.add(UserInputDataArgumentResolver())
+    }
+
+    override fun addCorsMappings(registry: CorsRegistry) {
+        registry.addMapping("/api/user/data/type")
+                .allowedOrigins("*")
     }
 }
