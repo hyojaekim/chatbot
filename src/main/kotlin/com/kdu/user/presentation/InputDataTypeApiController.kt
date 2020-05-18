@@ -10,18 +10,14 @@ import org.springframework.web.bind.annotation.*
 class InputDataTypeApiController(private val inputDataTypeInternalService: InputDataTypeInternalService) {
 
     @PostMapping
-    fun save(inputDataTypeRequestDto: InputDataTypeRequestDto): ResponseEntity<Void> {
-        inputDataTypeInternalService.save(inputDataTypeRequestDto)
-        return ResponseEntity.ok().build()
+    fun save(inputDataTypeRequestDto: InputDataTypeRequestDto): ResponseEntity<Long> {
+        val id = inputDataTypeInternalService.save(inputDataTypeRequestDto)
+        return ResponseEntity.ok(id)
     }
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long): ResponseEntity<Void> {
-        try {
-            inputDataTypeInternalService.delete(id)
-        } catch (e: Exception) {
-            println(e)
-        }
+        inputDataTypeInternalService.delete(id)
         return ResponseEntity.ok().build()
     }
 }

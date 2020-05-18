@@ -24,8 +24,17 @@ internal class InputDataTypeApiControllerTest {
 
     @Test
     internal fun `정상적으로 데이터 타입을 삭제한다`() {
+        val id = webTestClient.post()
+                .uri("/api/user/data/type")
+                .body(BodyInserters.fromFormData("type", "developer")
+                        .with("synonym", "dev"))
+                .exchange()
+                .expectStatus().isOk
+                .expectBody(Long::class.java)
+                .returnResult().responseBody!!
+
         webTestClient.delete()
-                .uri("/api/user/data/type/1")
+                .uri("/api/user/data/type/$id")
                 .exchange()
                 .expectStatus().isOk
     }
