@@ -8,9 +8,10 @@
                     align="center"
                     justify="center"
             >
-                <v-content v-if="contentNumber === 0"></v-content>
-                <UserData v-else-if="contentNumber === 1"></UserData>
+                <UserData v-if="contentNumber === 1"></UserData>
                 <TypeAndSynonym v-else-if="contentNumber === 2"></TypeAndSynonym>
+                <TypeAndSynonymEditor v-else-if="contentNumber === 3"></TypeAndSynonymEditor>
+                <v-content v-else></v-content>
             </v-row>
         </v-container>
     </v-content>
@@ -19,11 +20,12 @@
 <script>
     import UserData from "./UserData";
     import TypeAndSynonym from "./TypeAndSynonym";
+    import TypeAndSynonymEditor from "./TypeAndSynonymEditor";
     import { EventBus } from "../../utils/event-bus";
 
     export default {
         name: "Content",
-        components: {TypeAndSynonym, UserData},
+        components: {TypeAndSynonymEditor, TypeAndSynonym, UserData},
         data() {
             return {
                 contentNumber: 0

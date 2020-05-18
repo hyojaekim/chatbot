@@ -127,7 +127,7 @@
                     {
                         icon: 'mdi-chevron-up',
                         'icon-alt': 'mdi-label',
-                        text: '타입 및 동의어',
+                        text: '유형 및 동의어',
                         model: false,
                         children: [
                             {
@@ -136,7 +136,7 @@
                             },
                             {
                                 text: '추가하기',
-                                contentNumber: 0,
+                                contentNumber: 3,
                             },
                         ]
                     },
