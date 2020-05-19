@@ -49,7 +49,7 @@
                 let formData = new FormData();
                 formData.append('type', this.type);
                 formData.append('synonym', this.synonym);
-                API.post('/user/data/type', formData)
+                API.post('/admin/user/data/type', formData)
                     .then( (res) => {
                         if (res.status === 200) {
                             alert("정상적으로 저장되었습니다.")
