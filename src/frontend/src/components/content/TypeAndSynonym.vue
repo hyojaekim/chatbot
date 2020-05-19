@@ -20,39 +20,34 @@
 </template>
 
 <script>
+    import API from "../../utils/api";
+
     export default {
         name: "TypeAndSynonym",
-        data () {
+        data() {
             return {
                 search: '',
                 headers: [
-                    { text: '유형', value: 'type' },
-                    { text: '동의어', value: 'synonym' },
+                    {text: '유형', value: 'type'},
+                    {text: '동의어', value: 'synonym'},
                 ],
                 desserts: [
                     {
-                        type: '지하철',
-                        synonym: '전철',
-                    },
-                    {
-                        type: '지하철',
-                        synonym: '지하철',
-                    },
-                    {
-                        type: '학식',
-                        synonym: '학식',
-                    },
-                    {
-                        type: '학식',
-                        synonym: '밥',
-                    },
-                    {
-                        type: '학식',
-                        synonym: '핛',
+                        id: 0,
+                        type: '테스트 타입',
+                        synonym: 'test',
                     },
                 ],
             }
         },
+        created() {
+            API.get("/admin/user/data/type")
+                .then((res) => {
+                    if (res.status === 200) {
+                        this.desserts = res.data
+                    }
+                })
+        }
     }
 </script>
 
