@@ -7,14 +7,12 @@ import com.kdu.user.presentation.dto.UserInputDataResponseDto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/user/data")
 class UserInputDataApiController(private val userInputDataService: UserInputDataService) {
 
-    @PostMapping
+    @PostMapping("/api/user/data")
     fun saveUserInputData(userInputDataRequestDto: UserInputDataRequestDto): ResponseEntity<String> {
         userInputDataService.save(userInputDataRequestDto)
         return ResponseEntity.ok(ResponseMessage.Builder()
@@ -23,7 +21,7 @@ class UserInputDataApiController(private val userInputDataService: UserInputData
                 .toString())
     }
 
-    @GetMapping
+    @GetMapping("/api/admin/user/data")
     fun findAll(): ResponseEntity<List<UserInputDataResponseDto>> {
         val result: List<UserInputDataResponseDto> = userInputDataService.findAll()
         return ResponseEntity.ok(result)

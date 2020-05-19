@@ -15,7 +15,7 @@ internal class InputDataTypeApiControllerTest {
     @Test
     internal fun `정상적으로 데이터 타입을 저장한다`() {
         webTestClient.post()
-                .uri("/api/user/data/type")
+                .uri("/api/admin/user/data/type")
                 .body(BodyInserters.fromFormData("type", "abc")
                         .with("synonym", "test"))
                 .exchange()
@@ -25,7 +25,7 @@ internal class InputDataTypeApiControllerTest {
     @Test
     internal fun `정상적으로 데이터 타입을 삭제한다`() {
         val id = webTestClient.post()
-                .uri("/api/user/data/type")
+                .uri("/api/admin/user/data/type")
                 .body(BodyInserters.fromFormData("type", "developer")
                         .with("synonym", "dev"))
                 .exchange()

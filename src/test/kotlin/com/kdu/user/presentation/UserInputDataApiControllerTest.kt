@@ -28,7 +28,7 @@ internal class UserInputDataApiControllerTest {
     @Test
     internal fun `정상적으로 모든 데이터를 조회한다`() {
         val result = webTestClient.get()
-                .uri("/api/user/data")
+                .uri("/api/admin/user/data")
                 .exchange()
                 .expectStatus().isOk
                 .expectBodyList(UserInputDataResponseDto::class.java)
