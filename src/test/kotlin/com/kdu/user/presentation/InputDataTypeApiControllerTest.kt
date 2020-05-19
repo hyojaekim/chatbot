@@ -1,10 +1,12 @@
 package com.kdu.user.presentation
 
+import com.kdu.user.presentation.dto.InputDataTypeResponseDto
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
+import kotlin.test.assertNotNull
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class InputDataTypeApiControllerTest {
@@ -37,5 +39,17 @@ internal class InputDataTypeApiControllerTest {
                 .uri("/api/user/data/type/$id")
                 .exchange()
                 .expectStatus().isOk
+    }
+
+    @Test
+    internal fun `정상적으로 모든 데이터 타입과 동의어들을 가져온다`() {
+        val result = webTestClient.get()
+                .uri("/api/admin/user/data/type")
+                .exchange()
+                .expectStatus().isOk
+                .expectBodyList(InputDataTypeResponseDto::class.java)
+                .returnResult().responseBody
+
+        result?.forEach { d -> assertNotNull(d.id) }
     }
 }

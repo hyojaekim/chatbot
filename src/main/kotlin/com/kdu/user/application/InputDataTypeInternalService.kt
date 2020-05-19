@@ -30,4 +30,9 @@ class InputDataTypeInternalService(private val inputDataTypeRepository: InputDat
     fun findByContainsData(text: String): InputDataType? {
         return inputDataTypeRepository.findTypeWithSynonym(text)
     }
+
+    @Transactional(readOnly = true)
+    fun findAll(): List<InputDataType> {
+        return inputDataTypeRepository.findAll()
+    }
 }

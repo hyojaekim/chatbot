@@ -39,4 +39,11 @@ internal class InputDataTypeInternalServiceTest {
         assertThat(inputDatatypeInternalService.findByContainsData("good test hahaha")!!.id).isEqualTo(id)
         assertNull(inputDatatypeInternalService.findByContainsData("This is Test"))
     }
+
+    @Test
+    internal fun `모든 타입과 동의어들을 가져온다`() {
+        val result = inputDatatypeInternalService.findAll()
+
+        assertNotNull(result)
+    }
 }
