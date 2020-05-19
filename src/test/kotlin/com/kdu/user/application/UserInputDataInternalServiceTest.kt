@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import kotlin.test.assertNotNull
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class UserInputDataInternalServiceTest {
@@ -35,5 +36,20 @@ internal class UserInputDataInternalServiceTest {
         val savedUserInputData = userInputDataInternalService.save(text, inputDataType)
 
         assertTrue(savedUserInputData.count > 1)
+    }
+
+    @Test
+    internal fun `입력한 데이터를 모두 가져온다`() {
+        userInputDataInternalService.save("test data 1", null)
+        userInputDataInternalService.save("test data 2", null)
+        userInputDataInternalService.save("test data 3", null)
+
+        val result = userInputDataInternalService.findAll()
+
+        assertTrue(result.isNotEmpty())
+
+        for (data in result) {
+            assertNotNull(data.id)
+        }
     }
 }

@@ -16,4 +16,9 @@ class UserInputDataInternalService(private val userInputDataRepository: UserInpu
         userInputData = userInputData ?: UserInputData(text, inputDataType)
         return userInputDataRepository.save(userInputData)
     }
+
+    @Transactional(readOnly = true)
+    fun findAll(): List<UserInputData> {
+        return userInputDataRepository.findAll()
+    }
 }
