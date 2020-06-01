@@ -23,5 +23,7 @@ class WebMvcConfig : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/api/admin/**")
                 .allowedOrigins("*")
+        registry.addMapping("/api/login")
+                .allowedOrigins("*")
     }
 }
