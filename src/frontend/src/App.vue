@@ -1,5 +1,13 @@
 <template>
-    <v-app id="inspire">
+    <v-app id="inspire" v-if="this.role === 'GUEST'">
+        <KakaoLogin
+                api-key="a562fd4a59d0d9ec2095a74626523238"
+                image="kakao_account_login_btn_medium_wide"
+                :on-success=onSuccess
+                :on-failure=onFailure
+        />
+    </v-app>
+    <v-app id="inspire" v-else-if="this.role === 'ADMIN'">
         <SideBar></SideBar>
         <v-app-bar
                 :clipped-left="$vuetify.breakpoint.lgAndUp"
@@ -30,21 +38,50 @@
 <script>
     import SideBar from "./components/side/SideBar";
     import Contents from "./components/content/Contents";
+    import KakaoLogin from 'vue-kakao-login'
     import { EventBus } from "./utils/event-bus";
+    import API from "./utils/api"
+
+    let onFailure = (data) => {
+        console.log(data);
+        console.log("failure ")
+    };
 
     export default {
         name: 'App',
 
         components: {
+            KakaoLogin,
             Contents,
             SideBar,
         },
         methods: {
             toggleSideBar() {
                 EventBus.$emit("use-eventbus-toggle-side-bar")
+            },
+            onSuccess(data) {
+                let accessToken = data.access_token;
+                let formData = new FormData();
+                formData.append('accessToken', accessToken);
+                API.post("/login", formData)
+                    .then(response => {
+                        if (response.status === 200) {
+                            return response.data
+                        }
+                    }).then(isAdmin => {
+                        if (isAdmin) {
+                            this.role = "ADMIN"
+                        } else {
+                            this.role = "GUEST"
+                        }
+                    })
+            },
+            onFailure
+        },
+        data() {
+            return {
+                role: "GUEST",
             }
         },
-        data: () => ({
-        }),
     };
 </script>
