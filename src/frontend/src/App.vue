@@ -7,6 +7,9 @@
                 :on-failure=onFailure
         />
     </v-app>
+    <v-app id="inspire" v-else-if="this.role === 'USER'">
+        <ChattingRoom></ChattingRoom>
+    </v-app>
     <v-app id="inspire" v-else-if="this.role === 'ADMIN'">
         <SideBar></SideBar>
         <v-app-bar
@@ -14,7 +17,7 @@
                 app
                 color="grey lighten-5"
         >
-            <v-app-bar-nav-icon @click.stop = toggleSideBar></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon @click.stop=toggleSideBar></v-app-bar-nav-icon>
             <v-toolbar-title
                     style="width: 300px"
                     class="ml-0 pl-4"
@@ -39,8 +42,9 @@
     import SideBar from "./components/side/SideBar";
     import Contents from "./components/content/Contents";
     import KakaoLogin from 'vue-kakao-login'
-    import { EventBus } from "./utils/event-bus";
+    import {EventBus} from "./utils/event-bus";
     import API from "./utils/api"
+    import ChattingRoom from "./components/chattting/ChattingRoom";
 
     let onFailure = (data) => {
         console.log(data);
@@ -51,6 +55,7 @@
         name: 'App',
 
         components: {
+            ChattingRoom,
             KakaoLogin,
             Contents,
             SideBar,
@@ -72,7 +77,7 @@
                         if (isAdmin) {
                             this.role = "ADMIN"
                         } else {
-                            this.role = "GUEST"
+                            this.role = "USER"
                         }
                     })
             },
