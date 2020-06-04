@@ -8,7 +8,7 @@
         />
     </v-app>
     <v-app id="inspire" v-else-if="this.role === 'USER'">
-        <ChattingRoom></ChattingRoom>
+        <ChattingUserInfoEdit></ChattingUserInfoEdit>
     </v-app>
     <v-app id="inspire" v-else-if="this.role === 'ADMIN'">
         <SideBar></SideBar>
@@ -44,18 +44,17 @@
     import KakaoLogin from 'vue-kakao-login'
     import {EventBus} from "./utils/event-bus";
     import API from "./utils/api"
-    import ChattingRoom from "./components/chattting/ChattingRoom";
+    import ChattingUserInfoEdit from "./components/chattting/ChattingUserInfoEdit";
 
-    let onFailure = (data) => {
-        console.log(data);
-        console.log("failure ")
+    let onFailure = () => {
+        alert("로그인에 실패하였습니다.")
     };
 
     export default {
         name: 'App',
 
         components: {
-            ChattingRoom,
+            ChattingUserInfoEdit,
             KakaoLogin,
             Contents,
             SideBar,

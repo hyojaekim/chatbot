@@ -3,37 +3,49 @@
             class="mx-auto"
             width="60%"
             height="80%"
+            max-height="650px"
             color="#FDFDFD"
             style="margin-top: 3%"
     >
         <v-card-text>
-            <div>관리자 1:1 채팅</div>
+            <div>{{ this.userName }}님 안녕하세요.</div>
         </v-card-text>
-        <v-card-text style="max-height: 70%; overflow: scroll">
+        <v-card-text id="chat-room" style="max-height: 70%; overflow: scroll">
             <v-col
-                    v-for="(item, i) in items"
-                    :key="i"
+                    v-for="(item, idx) in messages"
+                    :key="idx"
                     cols="12"
             >
-                <v-card color="white" style="margin-right: 30%" v-if="isAdmin(item.role)">
-                    <v-card-subtitle v-text="item.message"/>
+                <v-card color="rgba(247, 230, 0, 1)" v-if="item.admin" style="text-align: center">
+                    <v-card-subtitle>
+                        <span>관리자 : </span>
+                        <span v-text="item.content"></span>
+                    </v-card-subtitle>
                 </v-card>
-                <v-card color="#FFD400" class="text-right" style="margin-left: 30%" v-else>
-                    <v-card-subtitle v-text="item.message"/>
+                <v-card color="rgba(0, 0, 0, 0.1)" v-else-if="messages.length - 1 === idx">
+                    <v-card-subtitle>
+                        <span v-text="item.userName + ' : '"></span>
+                        <span v-text="item.content"></span>
+                    </v-card-subtitle>
+                </v-card>
+                <v-card color="white" v-else>
+                    <v-card-subtitle>
+                        <span v-text="item.userName + ' : '"></span>
+                        <span v-text="item.content"></span>
+                    </v-card-subtitle>
                 </v-card>
             </v-col>
         </v-card-text>
         <v-row justify="center" style="margin-left: 30px; margin-right: 30px; margin-top: 30px">
             <v-col style="padding-right: 25px; padding-left: 25px">
                 <v-row>
-                    <v-textarea
-                            label="관리자에게 메시지 보내기 💬"
-                            auto-grow
-                            outlined
-                            row-height="9"
-                            class="mr-3"
-                    />
-                    <v-btn height="57" color="primary">작성</v-btn>
+                        <v-text-field
+                                v-model="message"
+                                @keyup="sendMessage"
+                                label="입력해주세요."
+                                hint="고운말을 사용합시다^^"
+                                outlined
+                        ></v-text-field>
                 </v-row>
             </v-col>
         </v-row>
@@ -41,52 +53,62 @@
 </template>
 
 <script>
+    import Stomp from 'webstomp-client'
+    import SockJS from 'sockjs-client'
+    import { BASE_URL } from '../../utils/api'
+
     export default {
         name: "ChattingRoom",
+        props: ['isAdmin', 'userName'],
+        created() {
+            this.connect()
+        },
+        updated() {
+            const container = this.$el.querySelector("#chat-room");
+            container.scrollTop = container.scrollHeight;
+        },
         data: () => ({
-            items: [
-                {
-                    role: 'admin',
-                    message: 'Hello! I\'m admin.',
-                },
-                {
-                    role: 'user',
-                    message: 'Hi!',
-                },
-                {
-                    role: 'admin',
-                    message: 'Hello! I\'m admin.',
-                },
-                {
-                    role: 'user',
-                    message: 'Hi!',
-                },
-                {
-                    role: 'admin',
-                    message: 'Hello! I\'m admin.',
-                },
-                {
-                    role: 'user',
-                    message: 'Hi!',
-                },
-                {
-                    role: 'admin',
-                    message: 'Hello! I\'m admin.',
-                },
-                {
-                    role: 'user',
-                    message: 'Hi!',
-                },
-            ],
+            isAdmin: false,
+            userName: "",
+            message: "",
+            messages: [],
         }),
         methods: {
-            isAdmin(role) {
-                return role === "admin"
+            sendMessage (e) {
+                if(e.keyCode === 13 && this.userName !== '' && this.message !== '' && this.message !== '\n'){
+                    this.send();
+                    this.message = ''
+                }
+            },
+            send() {
+                if (this.stompClient && this.stompClient.connected) {
+                    const message = {
+                        admin: this.isAdmin,
+                        userName: this.userName,
+                        content: this.message
+                    };
+                    this.stompClient.send("/api/chat/receive", JSON.stringify(message), {});
+                }
+            },
+            connect() {
+                let socket = new SockJS(BASE_URL);
+                this.stompClient = Stomp.over(socket);
+                this.stompClient.connect(
+                    {},
+                    () => {
+                        this.connected = true;
+                        this.stompClient.subscribe("/api/chat/send", res => {
+                            this.messages.push(JSON.parse(res.body))
+                        });
+                    },
+                    () => {
+                        this.connected = false;
+                    }
+                );
             }
         }
     }
 </script>
 
 <style scoped>
-
 </style>
