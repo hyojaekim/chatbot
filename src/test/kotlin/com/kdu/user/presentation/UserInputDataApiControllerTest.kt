@@ -1,5 +1,6 @@
 package com.kdu.user.presentation
 
+import com.kdu.common.util.TestSecurityConfiguration
 import com.kdu.user.presentation.dto.UserInputDataResponseDto
 import com.kdu.util.JsonFactory
 import org.junit.jupiter.api.Test
@@ -9,7 +10,9 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import kotlin.test.assertNotNull
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+        classes = [TestSecurityConfiguration::class],
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class UserInputDataApiControllerTest {
 
     @Autowired

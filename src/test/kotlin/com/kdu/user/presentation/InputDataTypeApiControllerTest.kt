@@ -1,5 +1,6 @@
 package com.kdu.user.presentation
 
+import com.kdu.common.util.TestSecurityConfiguration
 import com.kdu.user.presentation.dto.InputDataTypeResponseDto
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -8,7 +9,9 @@ import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
 import kotlin.test.assertNotNull
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+        classes = [TestSecurityConfiguration::class],
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class InputDataTypeApiControllerTest {
 
     @Autowired
