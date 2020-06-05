@@ -91,7 +91,7 @@
                 }
             },
             connect() {
-                let socket = new SockJS(BASE_URL);
+                let socket = new SockJS(`${BASE_URL}/websocket`);
                 this.stompClient = Stomp.over(socket);
                 this.stompClient.connect(
                     {},
