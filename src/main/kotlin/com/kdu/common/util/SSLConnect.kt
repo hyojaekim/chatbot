@@ -56,6 +56,7 @@ class SSLConnect {
 
         @Throws(Exception::class)
         fun getDocument(code: String): Document {
+            System.setProperty("jsse.enableSNIExtension", "false")
             val sslConnect = SSLConnect()
             val url = convertUrl(code)
             sslConnect.postHttps(url, 1000, 1000)
