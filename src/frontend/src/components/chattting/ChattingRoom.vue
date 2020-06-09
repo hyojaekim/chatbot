@@ -46,6 +46,12 @@
                                 hint="고운말을 사용합시다^^"
                                 outlined
                         ></v-text-field>
+                        <v-btn
+                                color="primary"
+                                style="margin-left: 5px"
+                                height="55px"
+                                @click="sendMessageByClick"
+                        >전송</v-btn>
                 </v-row>
             </v-col>
         </v-row>
@@ -75,7 +81,12 @@
         }),
         methods: {
             sendMessage (e) {
-                if(e.keyCode === 13 && this.userName !== '' && this.message !== '' && this.message !== '\n'){
+                if(e.keyCode === 13){
+                    this.sendMessageByClick()
+                }
+            },
+            sendMessageByClick() {
+                if (this.userName !== '' && this.message !== '' && this.message !== '\n') {
                     this.send();
                     this.message = ''
                 }
