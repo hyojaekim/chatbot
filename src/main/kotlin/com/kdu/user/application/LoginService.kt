@@ -1,7 +1,7 @@
 package com.kdu.user.application
 
-import com.kdu.user.domain.Admin
 import com.kdu.user.exception.LoginFailException
+import com.kdu.user.presentation.dto.KakaoInfoResponseDto
 import com.kdu.user.presentation.dto.LoginRequestDto
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpEntity
@@ -15,12 +15,16 @@ import org.springframework.web.client.RestTemplate
 class LoginService(val restTemplate: RestTemplate, val environment: Environment) {
 
     fun isAdmin(loginRequestDto: LoginRequestDto): Boolean {
-        val currentUser = requestKakaoId(loginRequestDto) ?: throw LoginFailException()
-        val adminID = environment.getProperty("kakao.admin.id") ?: throw LoginFailException()
-        return currentUser.id == adminID
+        val kakaoInfoResponseDto = requestKakaoInfo(loginRequestDto) ?: throw LoginFailException()
+        return isAdmin(kakaoInfoResponseDto)
     }
 
-    private fun requestKakaoId(loginRequestDto: LoginRequestDto): Admin? {
+    private fun isAdmin(kakaoInfoResponseDto: KakaoInfoResponseDto): Boolean {
+        val adminID = environment.getProperty("kakao.admin.id") ?: throw LoginFailException()
+        return kakaoInfoResponseDto.id == adminID
+    }
+
+    private fun requestKakaoInfo(loginRequestDto: LoginRequestDto): KakaoInfoResponseDto? {
         val accessToken = loginRequestDto.accessToken
         val headers = HttpHeaders()
         headers.add("Authorization", "bearer $accessToken")
@@ -29,7 +33,7 @@ class LoginService(val restTemplate: RestTemplate, val environment: Environment)
                 "https://kapi.kakao.com/v2/user/me",
                 HttpMethod.POST,
                 httpEntity,
-                Admin::class.java
+                KakaoInfoResponseDto::class.java
         )
         return result.body
     }
