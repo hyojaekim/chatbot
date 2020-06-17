@@ -3,7 +3,6 @@ package com.kdu.common.configuration
 import com.kdu.common.configuration.oauth2.CustomOAuth2ClientProperties
 import com.kdu.common.configuration.oauth2.CustomOAuth2Provider
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
@@ -19,7 +18,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
         http
                 .authorizeRequests()
                 .antMatchers("/api/login").permitAll()
-                .antMatchers("/api/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/api/admin/**").authenticated()
                 .antMatchers("/").permitAll()
                 .anyRequest().permitAll()
 
