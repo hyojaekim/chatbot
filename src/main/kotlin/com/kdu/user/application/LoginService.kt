@@ -7,6 +7,8 @@ import org.springframework.core.env.Environment
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.stereotype.Service
 import org.springframework.util.MultiValueMap
 import org.springframework.web.client.RestTemplate
@@ -19,12 +21,12 @@ class LoginService(val restTemplate: RestTemplate, val environment: Environment)
         return isAdmin(kakaoInfoResponseDto)
     }
 
-    private fun isAdmin(kakaoInfoResponseDto: KakaoInfoResponseDto): Boolean {
+    fun isAdmin(kakaoInfoResponseDto: KakaoInfoResponseDto): Boolean {
         val adminID = environment.getProperty("kakao.admin.id") ?: throw LoginFailException()
         return kakaoInfoResponseDto.id == adminID
     }
 
-    private fun requestKakaoInfo(loginRequestDto: LoginRequestDto): KakaoInfoResponseDto? {
+    fun requestKakaoInfo(loginRequestDto: LoginRequestDto): KakaoInfoResponseDto? {
         val accessToken = loginRequestDto.accessToken
         val headers = HttpHeaders()
         headers.add("Authorization", "bearer $accessToken")
@@ -36,5 +38,14 @@ class LoginService(val restTemplate: RestTemplate, val environment: Environment)
                 KakaoInfoResponseDto::class.java
         )
         return result.body
+    }
+
+    fun getAuthorities(isAdmin: Boolean): List<GrantedAuthority> {
+        val authorities = arrayListOf<GrantedAuthority>()
+        authorities.add(SimpleGrantedAuthority("ROLE_USER"))
+        if (isAdmin) {
+            authorities.add(SimpleGrantedAuthority("ROLE_ADMIN"))
+        }
+        return authorities
     }
 }
