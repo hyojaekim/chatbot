@@ -1,6 +1,7 @@
 package com.kdu.user.presentation
 
 import com.kdu.user.application.LoginService
+import com.kdu.user.presentation.dto.KakaoInfoResponseDto
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.jupiter.api.BeforeEach
@@ -34,7 +35,9 @@ internal class LoginControllerTest {
 
     @Test
     internal fun `로그인시 관리자인지 확인한다`() {
-        whenever(loginService.isAdmin(any())).thenReturn(true)
+        val kakaoInfo = KakaoInfoResponseDto("id")
+        whenever(loginService.requestKakaoInfo(any())).thenReturn(kakaoInfo)
+        whenever(loginService.isAdmin(kakaoInfo)).thenReturn(true)
 
         mockMvc.post("/api/login") {
             val formData = LinkedMultiValueMap<String, String>()
