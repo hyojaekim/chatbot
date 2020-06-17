@@ -11,6 +11,7 @@
                 <UserData v-if="contentNumber === 1"></UserData>
                 <TypeAndSynonym v-else-if="contentNumber === 2"></TypeAndSynonym>
                 <TypeAndSynonymEditor v-else-if="contentNumber === 3"></TypeAndSynonymEditor>
+                <ChattingRoom v-else-if="contentNumber === 4" :isAdmin="true" :userName="this.userName"></ChattingRoom>
                 <v-content v-else></v-content>
             </v-row>
         </v-container>
@@ -22,13 +23,15 @@
     import TypeAndSynonym from "./TypeAndSynonym";
     import TypeAndSynonymEditor from "./TypeAndSynonymEditor";
     import { EventBus } from "../../utils/event-bus";
+    import ChattingRoom from "../chattting/ChattingRoom";
 
     export default {
         name: "Content",
-        components: {TypeAndSynonymEditor, TypeAndSynonym, UserData},
+        components: {ChattingRoom, TypeAndSynonymEditor, TypeAndSynonym, UserData},
         data() {
             return {
-                contentNumber: 0
+                contentNumber: 0,
+                userName: "관리자"
             }
         },
         created() {

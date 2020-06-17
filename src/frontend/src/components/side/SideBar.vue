@@ -113,7 +113,7 @@
                 },
                 items: [
                     {
-                        icon: 'mdi-chevron-up',
+                        icon: 'mdi-chart-bar',
                         'icon-alt': 'mdi-chart-bar',
                         text: '사용자 데이터',
                         model: false,
@@ -125,7 +125,7 @@
                         ]
                     },
                     {
-                        icon: 'mdi-chevron-up',
+                        icon: 'mdi-label',
                         'icon-alt': 'mdi-label',
                         text: '유형 및 동의어',
                         model: false,
@@ -137,6 +137,18 @@
                             {
                                 text: '추가하기',
                                 contentNumber: 3,
+                            },
+                        ]
+                    },
+                    {
+                        icon: 'mdi-chat',
+                        'icon-alt': 'mdi-chat',
+                        text: '익명 채팅방',
+                        model: false,
+                        children: [
+                            {
+                                text: '입장하기',
+                                contentNumber: 4,
                             },
                         ]
                     },
