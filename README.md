@@ -13,6 +13,7 @@
 * [기술 스택](https://github.com/hyojaekim/chatbot#-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
 * [Wiki](https://github.com/hyojaekim/chatbot#wiki)
 * [TODO](https://github.com/hyojaekim/chatbot#-todo)
+* [기능 이미지로 보기](https://github.com/hyojaekim/chatbot#-todo)
 
 <br/><br/>
 
@@ -47,26 +48,6 @@
 | | 관리자 페이지(데이터 조회 및 분류) |
 | | 익명 채팅방(카카오 로그인) |
 
-![캠퍼스 알림이 메뉴](img/캠퍼스알림이메뉴.png)
-
-![캠퍼스 설정](img/캠퍼스설정.png)
-
-![학식 메뉴](img/학식메뉴.png)
-
-![지하철 정보](img/지하철정보.png)
-
-![버스 시간표](img/버스정보.png)
-
-![기타 정보](img/기타.png)
-
-![Q&A, 공지사항, 전화번호 검색](img/Q&A_공지사항_전화번호.png)
-
-![QR코드 이벤트](img/QR코드이벤트.png)
-
-![관리자페이지](img/관리자페이지.png)
-
-![단체 익명 채팅](img/단체익명채팅.png)
-
 
 #### #2 코로나 정보
 
@@ -78,12 +59,6 @@
 | | 마스크 5부제 (구매 가능한 날짜) |
 | | 예방 수칙 |
 | | 의심증상 |
-
-![코로나 정보 메뉴](img/코로나정보메뉴.png)
-
-![코로나 기타 정보](img/코로나기타정보.png)
-
-![마스크 재고](img/마스크재고.png)
 
 <br/><br/>
 
@@ -161,3 +136,39 @@ Issue Tracker : GitHub Issues, GitHub Kanban Board
   - [ ] 즐겨찾기 삭제
   - [ ] 즐겨찾기 버튼 조회
 - [ ] 미세먼지 및 날씨
+
+<br/><br/>
+
+## 🧩 기능 이미지로 보기
+
+#### #1 캠퍼스 알림이
+
+![캠퍼스 알림이 메뉴](img/캠퍼스알림이메뉴.png)
+
+![캠퍼스 설정](img/캠퍼스설정.png)
+
+![학식 메뉴](img/학식메뉴.png)
+
+![지하철 정보](img/지하철정보.png)
+
+![버스 시간표](img/버스정보.png)
+
+![기타 정보](img/기타.png)
+
+![Q&A, 공지사항, 전화번호 검색](img/Q&A_공지사항_전화번호.png)
+
+![QR코드 이벤트](img/QR코드이벤트.png)
+
+![관리자페이지](img/관리자페이지.png)
+
+![단체 익명 채팅](img/단체익명채팅.png)
+
+---
+
+#### #2 코로나 정보
+
+![코로나 정보 메뉴](img/코로나정보메뉴.png)
+
+![코로나 기타 정보](img/코로나기타정보.png)
+
+![마스크 재고](img/마스크재고.png)
