@@ -13,7 +13,7 @@
 * [기술 스택](https://github.com/hyojaekim/chatbot#-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
 * [Wiki](https://github.com/hyojaekim/chatbot#wiki)
 * [TODO](https://github.com/hyojaekim/chatbot#-todo)
-* [기능 이미지로 보기](https://github.com/hyojaekim/chatbot#-todo)
+* [기능 이미지로 보기](https://github.com/hyojaekim/chatbot#-%EA%B8%B0%EB%8A%A5-%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%A1%9C-%EB%B3%B4%EA%B8%B0)
 
 <br/><br/>
 
