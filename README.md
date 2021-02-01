@@ -1,4 +1,4 @@
-# 오픈빌더를 활용한 챗봇 서비스 ![Build Status](https://travis-ci.org/hyojaekim/chatbot.svg?branch=master)
+# 오픈빌더를 활용한 챗봇 서비스
 
 ![통계](img/통계.png)
 
@@ -80,14 +80,14 @@ Issue Tracker : GitHub Issues, GitHub Kanban Board
 
 ## [Wiki](https://github.com/hyojaekim/chatbot/wiki)
 
-- [DB 방언 문제](https://github.com/hyojaekim/chatbot/wiki/DB-%EB%B0%A9%EC%96%B8-%EB%AC%B8%EC%A0%9C-(MySQL5InnoDBDialect-Deprecated))
-- [OSIV](https://github.com/hyojaekim/chatbot/wiki/OSIV-(Open-Session-In-View)-%EB%AC%B8%EC%A0%9C%EC%A0%90)
-- [JSON 라이브러리 선택하기](https://github.com/hyojaekim/chatbot/wiki/JSON-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%84%A0%ED%83%9D-%EA%B8%B0%EC%A4%80)
-- [크롤링을 위한 라이브러리 선택](https://github.com/hyojaekim/chatbot/wiki/%ED%81%AC%EB%A1%A4%EB%A7%81%EC%9D%84-%EC%9C%84%ED%95%9C-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%84%A0%EC%A0%95-(Jsoup))
-- [지하철 정보](https://github.com/hyojaekim/chatbot/wiki/%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%A7%80%ED%95%98%EC%B2%A0-%EC%A0%95%EB%B3%B4)
-- [마스크 재고 정보](https://github.com/hyojaekim/chatbot/wiki/%EB%A7%88%EC%8A%A4%ED%81%AC-%EC%9E%AC%EA%B3%A0-%EC%A0%95%EB%B3%B4-%EC%98%88%EC%8B%9C)
-- [주소로 위도, 경도 알아내기](https://github.com/hyojaekim/chatbot/wiki/%EC%A3%BC%EC%86%8C-%EC%9C%84%EB%8F%84,-%EA%B2%BD%EB%8F%84-%EC%95%8C%EC%95%84%EB%82%B4%EA%B8%B0)
-- [중요한 키값 관리하기](https://hyojaedev.tistory.com/13)
+- [DB 방언 문제 해결하기](https://github.com/hyojaekim/chatbot/wiki/DB-%EB%B0%A9%EC%96%B8-%EB%AC%B8%EC%A0%9C-(MySQL5InnoDBDialect-Deprecated))
+- [OSIV 옵션을 왜 꺼야하나?](https://github.com/hyojaekim/chatbot/wiki/OSIV-(Open-Session-In-View)-%EB%AC%B8%EC%A0%9C%EC%A0%90)
+- [어떤 JSON 라이브러리를 사용할까?](https://github.com/hyojaekim/chatbot/wiki/JSON-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%84%A0%ED%83%9D-%EA%B8%B0%EC%A4%80)
+- [크롤링을 위한 라이브러리는 무엇을 선택할까?](https://github.com/hyojaekim/chatbot/wiki/%ED%81%AC%EB%A1%A4%EB%A7%81%EC%9D%84-%EC%9C%84%ED%95%9C-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%84%A0%EC%A0%95-(Jsoup))
+- [실시간 지하철 정보 API 데이터(예시)](https://github.com/hyojaekim/chatbot/wiki/%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%A7%80%ED%95%98%EC%B2%A0-%EC%A0%95%EB%B3%B4)
+- [마스크 재고 정보 API 데이터(예시)](https://github.com/hyojaekim/chatbot/wiki/%EB%A7%88%EC%8A%A4%ED%81%AC-%EC%9E%AC%EA%B3%A0-%EC%A0%95%EB%B3%B4-%EC%98%88%EC%8B%9C)
+- [Geocoding API - 주소를 주면 위도, 경도 알아내기](https://github.com/hyojaekim/chatbot/wiki/%EC%A3%BC%EC%86%8C-%EC%9C%84%EB%8F%84,-%EA%B2%BD%EB%8F%84-%EC%95%8C%EC%95%84%EB%82%B4%EA%B8%B0)
+- [TravisCI 중요한 키값 관리하기](https://hyojaedev.tistory.com/13)
 - [시리로 배포하기](https://hyojaedev.tistory.com/15)
 
 <br/><br/>
@@ -113,15 +113,6 @@ Issue Tracker : GitHub Issues, GitHub Kanban Board
   - [x] 동의어 및 유형 설정
 - [x] 단체 익명 채팅방
   - [x] 카카오 로그인
-- [ ] 중고 거래
-  - [ ] 게시글 작성(제목, 내용, 오픈 채팅 링크)
-  - [ ] 게시글 조회
-  - [ ] 게시글 삭제
-- [ ] 지하철 도착 정보 즐겨찾기
-  - [ ] 즐겨찾기 추가
-  - [ ] 즐겨찾기 삭제
-  - [ ] 즐겨찾기 버튼 조회
-- [ ] 미세먼지 및 날씨
 
 <br/><br/>
 
