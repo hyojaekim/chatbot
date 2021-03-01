@@ -61,13 +61,13 @@
 ```
 Language : Kotlin
 
-Backend : Spring Boot, JPA
+Backend : Spring Boot, SpringSecurity, JPA
 
 Database : MariaDB
 
 AWS : EC2, RDS, S3, CodeDeploy
 
-CD/CI : Travis-CI
+CI/CD : Travis-CI
  
 Source version control : GIT
 
